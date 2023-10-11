@@ -37,9 +37,9 @@
 # Stworzenie interfejsu poruszania sie po terminalu.
 
 def main():
-# Tutaj umiescimy glowny kod Osobistego asystenta
+    # Tutaj umiescimy glowny kod Osobistego asystenta
 
-
-if __name__ == '__main__':
-    main()
-
+    if __name__ == '__main__':
+        main()
+        print('dodano nowa zmiane do brancha')
+        print('dodano jesxcze jedna linie do bracnh')
