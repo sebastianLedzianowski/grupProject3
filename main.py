@@ -29,3 +29,4 @@ def main():
         main()
         print('dodano nowa zmiane do brancha')
         print('dodano jesxcze jedna linie do bracnh')
+        print("dodano newDJ")
