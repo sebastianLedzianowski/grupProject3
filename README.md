@@ -3,7 +3,7 @@
 "Osobisty asystent" z interfejsem wiersza poleceń.
 
 
-Zadania asystenta:
+## Zadania asystenta:
 
 1. Przechowywać kontakty z nazwiskami, adresami, numerami telefonów, e-mailami i datami urodzin w książce kontaktów;
 2. Wyświetlać listę kontaktów, których urodziny przypadają za określoną liczbę dni od bieżącej daty;
@@ -17,7 +17,7 @@ Zadania asystenta:
 10. Bot powinien analizować wprowadzony tekst i próbować odgadnąć, czego chce od niego użytkownik oraz zaproponować najbliższe polecenie do wykonania.
 
 
-Kryteria zaliczenia projektu:
+## Kryteria zaliczenia projektu:
 
 1. Projekt musi być zapisany w osobnym repozytorium i być publicznie dostępny (GitHub, GitLab lub BitBucket);
 2. Projekt zawiera szczegółowe instrukcje dotyczące instalacji i użytkowania;

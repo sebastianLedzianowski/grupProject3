@@ -1,16 +1,40 @@
-# This is a sample Python script.
-
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+# Wszystkie zdaerzenia wykonane w tym programie maja byc zapisywane w pliku na dysku twardym.
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
+# Na pocztaku chcemy dodac nowy kontakt do naszej ksiazki kontaktow.
+# Kontakt ma sie skladac z Imienia i Nazwiska, numeru telefonu, adrsu e-mail oraz daty urodzin.
 
 
-# Press the green button in the gutter to run the script.
+# Chcemy miec mozliwosc wyszukiwania kontaktow z naszej ksiazki telefonicznej.
+
+
+# Chcemy tez miec mozliwosc edytowania kontaktu.
+
+
+# Chcemy miec mozliwosc usuniecia kontaktu z naszej listy.
+
+
+# Przy wprowadzaniu takich danych jak numer, telefonu, adresu e-mail czy daty urodzenia,
+#  ma wyskakiwac blad gdy dane beda nieprawidlowe.
+
+
+# Chcemy miec mozliwosc sprawdzenia ile czy ktos ma urodziny w ciagu najblizszych 30 dni
+# badz tez wypisac liste wszystykich urodzin sortujac od najblizszych.
+
+# Druga sprawa to mozliwosc dodawanie notatek do naszego notesu.
+# Notatka ma sie skladac dwoch rzeczy: 'Tag' oraz przedmiotu notatki.
+# Przedmiotem notatki moze byc informacja tekstowa, obraz, dokument, film itp.
+
+
+# Edycja notatek
+
+# Usuwanie notatek
+
+
+def main():
+    # Tutaj umiescimy glowny kod Osobistego asystenta
+
+
 if __name__ == '__main__':
-    print_hi('PyCharm')
+    main()
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
