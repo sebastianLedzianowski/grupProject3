@@ -3,6 +3,7 @@
 
 # Na pocztaku chcemy dodac nowy kontakt do naszej ksiazki kontaktow.
 # Kontakt ma sie skladac z Imienia i Nazwiska, numeru telefonu, adrsu e-mail oraz daty urodzin.
+# Kontakty musza byc zapisywane w zewnetrzym pliku.
 
 
 # Chcemy miec mozliwosc wyszukiwania kontaktow z naszej ksiazki telefonicznej.
@@ -24,15 +25,19 @@
 # Druga sprawa to mozliwosc dodawanie notatek do naszego notesu.
 # Notatka ma sie skladac dwoch rzeczy: 'Tag' oraz przedmiotu notatki.
 # Przedmiotem notatki moze byc informacja tekstowa, obraz, dokument, film itp.
+# Notatki musza byc zapisywane w pliku zewnatrzym.
 
 
 # Edycja notatek
 
+
 # Usuwanie notatek
 
 
+# Stworzenie interfejsu poruszania sie po terminalu.
+
 def main():
-    # Tutaj umiescimy glowny kod Osobistego asystenta
+# Tutaj umiescimy glowny kod Osobistego asystenta
 
 
 if __name__ == '__main__':
