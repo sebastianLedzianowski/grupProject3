@@ -1,5 +1,5 @@
 from src.mongodb.db_manager import DatabaseManager
-from src.models import AdressBook, NoteBook
+from src.mongodb.models import AdressBook, NoteBook
 from src.class_Note import *
 from src.data_decorators import *
 from datetime import datetime
