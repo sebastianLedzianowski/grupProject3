@@ -1,4 +1,7 @@
 from src.mongodb.db_manager import DatabaseManager
+from src.models import AdressBook, NoteBook
+
+
 import re
 # Wszystkie zdaerzenia wykonane w tym programie maja byc zapisywane w pliku na dysku twardym.
 
@@ -62,8 +65,21 @@ class Note:
 
 
 def main():
-    print('db test')
-    DatabaseManager().show_all()
+    #TEST
+    db = DatabaseManager()
+    db.show_all(AdressBook)
+    print('\n')
+    db.show_all(NoteBook)
+
+    #dodawanie danych do BD
+
+    # dodanie do kolekcji adress_book
+    # contact = AdressBook(imie="Adam", nazwisko='Smith', numer_telefonu="123456789", email="smith@email.com", data_urodzin="2000-01-01")
+    #db.add(contact)
+
+    # dodanie do kolekcji note_book
+    # note = NoteBook(tytul="My Note", tresc="This is a note.", tagi=["tag1", "tag2"])
+    # db.add(note)
 
 
 if __name__ == '__main__':
