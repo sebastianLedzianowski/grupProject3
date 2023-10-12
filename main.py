@@ -51,7 +51,7 @@ def main():
     # db.edit(AdressBook, 'nazwisko', 'Smith', updates)
     # print('\n')
 
-    db.show_all(AdressBook)
+    print(db.show_all(AdressBook))
 
 
 if __name__ == '__main__':

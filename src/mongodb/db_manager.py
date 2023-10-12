@@ -1,6 +1,6 @@
 from pymongo import MongoClient
 from dotenv import load_dotenv
-from src.models import AdressBook, NoteBook
+from src.mongodb.models import AdressBook, NoteBook
 from typing import Type, List, Union
 from dataclasses import asdict
 import os
