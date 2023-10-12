@@ -26,11 +26,11 @@ from datetime import datetime
 def validate_phone_number(func):
     def wrapper(*args, **kwargs):
         phone_number = args[2]
-        pattern = r"\d{3}-\d{3}-\d{3}"
+        pattern = r"\d{9}"
         if re.match(pattern, phone_number):
             return func(*args, **kwargs)
         else:
-            return f'Wrong phone number. Sample number: "123-456-789"'
+            return f'Wrong phone number. Sample number: "123456789"'
     return wrapper
 
 def validate_e_mail(func):
@@ -47,10 +47,10 @@ def is_valid_date(func):
     def wrapper(*args, **kwargs):
         birthday = args[4]
         try:
-            datetime.strptime(birthday, '%d-%m-%Y')
+            datetime.strptime(birthday, '%Y-%m-%d')
             return func(*args, **kwargs)
         except ValueError:
-            return f'Wrong date of birth. Correct format "dd-mm-yyyy"'
+            return f'Wrong date of birth. Correct format "yyyy-mm-dd"'
     return wrapper
 
 
@@ -68,15 +68,19 @@ class Note:
         self.content = content
 
     def add_note(self):
+        pass
 # Dodawanie notatek do notbook.
 
     def edit_note(self):
+        pass
 # Edycja notatek
 
     def remove_note(self):
+        pass
 # Usuwanie notatek
 
     def sort_note(self):
+        pass
 # Sortowanie notatek po tytule, badz tagach.
 
 
@@ -94,7 +98,7 @@ def main():
     #dodawanie danych do BD
 
     # dodanie do kolekcji adress_book
-    # contact = AdressBook(imie="Adam", nazwisko='Smith', numer_telefonu="123-456-789", email="smith@email.com", data_urodzin="2000-01-01")
+    # contact = AdressBook(imie="Adam", nazwisko='Smith', numer_telefonu="123-456-789", email="smith@email.com", data_urodzin="01-01-2000")
     #db.add(contact)
 
     # dodanie do kolekcji note_book
