@@ -17,14 +17,14 @@ def main():
     #TEST
     db = DatabaseManager()
 
-    #dodawanie danych do BD
+    # dodawanie danych do BD
 
     # dodanie do kolekcji adress_book
-    # contact = AdressBook(imie="Adam", nazwisko='Smith', numer_telefonu="123-456-789", email="smith@email.com", data_urodzin="01-01-2000")
-    #db.add(contact)
+    # contact = AdressBook(name="Adam", surname="Smith", phone_number="123456789", email="smith@email.com", birthday="2001-01-20")
+    # db.add(contact)
 
     # dodanie do kolekcji note_book
-    # note = NoteBook(tytul="My Note", tresc="This is a note.", tagi=["tag1", "tag2"])
+    # note = NoteBook(title="My Note", content="This is a note.", tag=["tag1", "tag2"])
     # db.add(note)
 
 
