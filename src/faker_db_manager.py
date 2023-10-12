@@ -1,5 +1,5 @@
 from src.mongodb.db_manager import DatabaseManager
-from src.models import AdressBook, NoteBook
+from src.mongodb.models import AdressBook, NoteBook
 from faker import Faker
 import random
 
