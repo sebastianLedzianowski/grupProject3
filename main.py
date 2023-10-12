@@ -1,5 +1,5 @@
 from src.mongodb.db_manager import DatabaseManager
-from src.models import AdressBook, NoteBook
+from src.mongodb.models import AdressBook
 import re
 from datetime import datetime
 
@@ -110,7 +110,7 @@ def main():
     # db.edit(AdressBook, 'nazwisko', 'Smith', updates)
     # print('\n')
 
-    db.show_all(AdressBook)
+    print(db.show_all(AdressBook))
 
 
 if __name__ == '__main__':
