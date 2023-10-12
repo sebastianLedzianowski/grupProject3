@@ -1,5 +1,6 @@
 from src.mongodb.db_manager import DatabaseManager
 from src.mongodb.models import AdressBook, NoteBook
+from src.faker_db_manager import faker_Notesbook, faker_AdressBook
 from src.data_decorators import *
 from datetime import datetime
 import re
@@ -15,7 +16,7 @@ import re
 def main():
     #TEST
     db = DatabaseManager()
-    print(db.show_all(NoteBook))
+
     #dodawanie danych do BD
 
     # dodanie do kolekcji adress_book
@@ -35,8 +36,14 @@ def main():
     # db.edit(AdressBook, 'nazwisko', 'Smith', updates)
     # print('\n')
 
-    db.show_all(AdressBook)
-
+    for contact in db.show_all(AdressBook):
+        print(f"Name: {contact['name']}, Surname: {contact['surname']}, Phone number: {contact['phone_number']},"
+              f" Email: {contact['email']}, Birthday: {contact['birthday']}\n")
+    print()
+    print("-"*130)
+    print()
+    for note in db.show_all(NoteBook):
+        print(f"Title: {note['title']}, Tag: {note['tag']}\nContent: {note['content']}\n")
 
 if __name__ == '__main__':
     main()
