@@ -22,10 +22,9 @@ from src.mongodb.db_manager import DatabaseManager
 # Stworzenie interfejsu poruszania sie po terminalu.
 
 def main():
+    print('db test')
     DatabaseManager().show_all()
 
-    if __name__ == '__main__':
-        main()
 
-
-
+if __name__ == '__main__':
+    main()
