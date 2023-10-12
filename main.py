@@ -1,5 +1,5 @@
 from src.mongodb.db_manager import DatabaseManager
-
+import re
 # Wszystkie zdaerzenia wykonane w tym programie maja byc zapisywane w pliku na dysku twardym.
 
 
@@ -19,6 +19,16 @@ from src.mongodb.db_manager import DatabaseManager
 
 # Przy wprowadzaniu takich danych jak numer, telefonu, adresu e-mail czy daty urodzenia,
 #  ma wyskakiwac blad gdy dane beda nieprawidlowe.
+def validate_phone_number(func):
+    def wrapper(*args, **kwargs):
+        phone_number = args[2]
+        if re.match(r"\d{3}-\d{3}-\d{3}", phone_number):
+            return func(*args, **kwargs)
+        else:
+            print('Invalid phone number.')
+    return wrapper
+
+
 
 
 # Chcemy miec mozliwosc sprawdzenia ile czy ktos ma urodziny w ciagu najblizszych 30 dni
