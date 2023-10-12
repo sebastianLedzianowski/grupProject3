@@ -1,8 +1,9 @@
 from src.mongodb.db_manager import DatabaseManager
 from src.models import AdressBook, NoteBook
-
-
 import re
+from datetime import datetime
+
+
 # Wszystkie zdaerzenia wykonane w tym programie maja byc zapisywane w pliku na dysku twardym.
 
 
@@ -25,13 +26,32 @@ import re
 def validate_phone_number(func):
     def wrapper(*args, **kwargs):
         phone_number = args[2]
-        if re.match(r"\d{3}-\d{3}-\d{3}", phone_number):
+        pattern = r"\d{3}-\d{3}-\d{3}"
+        if re.match(pattern, phone_number):
             return func(*args, **kwargs)
         else:
-            print('Invalid phone number.')
+            return f'Wrong phone number. Sample number: "123-456-789"'
     return wrapper
 
+def validate_e_mail(func):
+    def wrapper(*args, **kwargs):
+        e_mail = args[3]
+        pattern = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
+        if re.match(pattern, e_mail):
+            return func(*args, **kwargs)
+        else:
+            return f'Bad email. Example email address: "silmple_adres@ios.com"'
+    return wrapper
 
+def is_valid_date(func):
+    def wrapper(*args, **kwargs):
+        birthday = args[4]
+        try:
+            datetime.strptime(birthday, '%d-%m-%Y')
+            return func(*args, **kwargs)
+        except ValueError:
+            return f'Wrong date of birth. Correct format "dd-mm-yyyy"'
+    return wrapper
 
 
 # Chcemy miec mozliwosc sprawdzenia ile czy ktos ma urodziny w ciagu najblizszych 30 dni
@@ -74,7 +94,7 @@ def main():
     #dodawanie danych do BD
 
     # dodanie do kolekcji adress_book
-    # contact = AdressBook(imie="Adam", nazwisko='Smith', numer_telefonu="123456789", email="smith@email.com", data_urodzin="2000-01-01")
+    # contact = AdressBook(imie="Adam", nazwisko='Smith', numer_telefonu="123-456-789", email="smith@email.com", data_urodzin="2000-01-01")
     #db.add(contact)
 
     # dodanie do kolekcji note_book
