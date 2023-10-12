@@ -20,7 +20,7 @@ class DatabaseManager:
         self.adress_book = self.db["adress_book"]
         self.note_book = self.db["note_book"]
 
-    def show_all(self, value: Type[Union[AdressBook, NoteBook]]) -> List[Union[AdressBook, NoteBook]]:
+    def show_all(self, value_type: Type[Union[AdressBook, NoteBook]]) -> List[Union[AdressBook, NoteBook]]:
         """
         Wyświetla wszystkie wpisy z wybranej kolekcji (książka adresowa lub notatnik).
 
@@ -30,15 +30,15 @@ class DatabaseManager:
         Returns:
         - List[Union[AdressBook, NoteBook]]: Lista obiektów z wybranej kolekcji.
         """
-        if value == AdressBook:
+        if value_type == AdressBook:
             collection = self.adress_book
             return [i for i in collection.find()]
 
-        if value == NoteBook:
+        if value_type == NoteBook:
             collection = self.note_book
             return [i for i in collection.find()]
 
-    def add(self, value: Union[AdressBook, NoteBook]):
+    def add(self, value_type: Union[AdressBook, NoteBook]):
         """
         Dodaje nowy wpis do odpowiedniej kolekcji w bazie danych.
 
@@ -48,27 +48,62 @@ class DatabaseManager:
         Returns:
         - ObjectId: ID dodanego wpisu.
         """
-        if isinstance(value, AdressBook):
+
+        # Wybór odpowiedniej kolekcji
+        if isinstance(value_type, AdressBook):
             collection = self.adress_book
-        elif isinstance(value, NoteBook):
+        elif isinstance(value_type, NoteBook):
             collection = self.note_book
         else:
             raise ValueError('Nie ma takiej bazy o danej nazwie.')
 
-        return collection.insert_one(asdict(value)).inserted_id
+        return collection.insert_one(asdict(value_type)).inserted_id
 
+    def edit(self, value_type: Type[Union[AdressBook, NoteBook]], field: str, value: str, updates: dict):
+        """
+        Edytuje wartości w rekordzie wybranym po danym polu.
 
+        Args:
+        - value_type (Type[Union[AdressBook, NoteBook]]): Typ rekordu do edycji.
+        - field (str): Pole do wyszukania (np. 'nazwisko' dla AdressBook).
+        - value (str): Wartość do wyszukania.
+        - updates (dict): Słownik z aktualizacjami.
 
-db = DatabaseManager()
+        Returns:
+        - UpdateResult: Wynik operacji aktualizacji.
+        """
 
+        # Wybór odpowiedniej kolekcji
+        if value_type == AdressBook:
+            collection = self.adress_book
+        elif value_type == NoteBook:
+            collection = self.note_book
+        else:
+            raise ValueError('Nie ma takiej bazy o danej nazwie.')
 
+        # Znajdz wszystrkie rekord z daną wartością
+        records = list(collection.find({field: value}))
 
-print(db.show_all(AdressBook))
+        if not records:
+            print(f'Nie znaleziuono żadnego rekordu z {field}: {value}')
+            return
 
+        if len(records) > 1:
+            print(f'Znaleziono kilka rekordów z {field}: {value}')
+            for i, record in enumerate(records, 1):
+                if value_type == AdressBook:
+                    print(f"{i}. {record['imie']} {record['nazwisko']} - {record['email']}")
+                elif value_type == NoteBook:
+                    print(f"{i}. {record['tytul']} - Tagi: {', '.join(record['tagi'])}")
 
+            choice = int(input(f'Wybierz numer rekordu do edycji (1-{len(records)}): '))
+            if choice < 1 or choice > len(records):
+                print('Nieprawidłowy wybór.')
+                return
+            record_to_edit = records[choice - 1]
+        else:
+            record_to_edit = records[0]
 
-
-
-
-
-
+        # Aktualizuj wybrany rekord
+        result = collection.update_one({'_id': record_to_edit['_id']}, {"$set": updates})
+        return result
