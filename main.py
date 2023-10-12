@@ -28,12 +28,24 @@ from src.mongodb.db_manager import DatabaseManager
 # Notatka ma sie skladac dwoch rzeczy: 'Tag' oraz przedmiotu notatki.
 # Przedmiotem notatki moze byc informacja tekstowa, obraz, dokument, film itp.
 # Notatki musza byc zapisywane w pliku zewnatrzym.
+class Note:
+    def __init__(self, title, tag, content):
+        self.title = title
+        self.tag = tag
+        self.content = content
 
+    def add_note(self):
+# Dodawanie notatek do notbook.
 
+    def edit_note(self):
 # Edycja notatek
 
-
+    def remove_note(self):
 # Usuwanie notatek
+
+    def sort_note(self):
+# Sortowanie notatek po tytule, badz tagach.
+
 
 
 # Stworzenie interfejsu poruszania sie po terminalu.
