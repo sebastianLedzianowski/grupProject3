@@ -1,5 +1,4 @@
-
-
+from src.mongodb.db_manager import DatabaseManager
 
 # Przy wprowadzaniu takich danych jak numer, telefonu, adresu e-mail czy daty urodzenia,
 #  ma wyskakiwac blad gdy dane beda nieprawidlowe.
@@ -23,11 +22,10 @@
 # Stworzenie interfejsu poruszania sie po terminalu.
 
 def main():
-    # Tutaj umiescimy glowny kod Osobistego asystenta
+    DatabaseManager().show_all()
 
     if __name__ == '__main__':
         main()
-        print('dodano nowa zmiane do brancha')
-        print('dodano jesxcze jedna linie do bracnh')
-        print("dodano newDJ")
-        print("Branch")
+
+
+
