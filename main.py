@@ -1,10 +1,26 @@
 from src.mongodb.db_manager import DatabaseManager
 from src.models import AdressBook, NoteBook
+from src.mongodb.models import AdressBook, NoteBook
 from src.data_decorators import *
 from datetime import datetime
 import re
 
-import random
+# Wszystkie zdaerzenia wykonane w tym programie maja byc zapisywane w pliku na dysku twardym.
+
+
+# Na pocztaku chcemy dodac nowy kontakt do naszej ksiazki kontaktow.
+# Kontakt ma sie skladac z Imienia i Nazwiska, numeru telefonu, adrsu e-mail oraz daty urodzin.
+# Kontakty musza byc zapisywane w zewnetrzym pliku.
+
+
+# Chcemy miec mozliwosc wyszukiwania kontaktow z naszej ksiazki telefonicznej.
+
+
+# Chcemy tez miec mozliwosc edytowania kontaktu.
+
+
+# Chcemy miec mozliwosc usuniecia kontaktu z naszej listy.
+
 
 # Chcemy miec mozliwosc sprawdzenia ile czy ktos ma urodziny w ciagu najblizszych 30 dni
 # badz tez wypisac liste wszystykich urodzin sortujac od najblizszych.
@@ -16,10 +32,11 @@ import random
 def main():
     #TEST
     db = DatabaseManager()
+    print(db.show_all(NoteBook))
     #dodawanie danych do BD
 
     # dodanie do kolekcji adress_book
-    # contact = AdressBook(imie="Adam", nazwisko='Smith', numer_telefonu="123456789", email="smith@email.com", data_urodzin="2001-01-01")
+    # contact = AdressBook(imie="Adam", nazwisko='Smith', numer_telefonu="123-456-789", email="smith@email.com", data_urodzin="01-01-2000")
     #db.add(contact)
 
     # dodanie do kolekcji note_book
@@ -35,6 +52,7 @@ def main():
     # db.edit(AdressBook, 'nazwisko', 'Smith', updates)
     # print('\n')
 
+    db.show_all(AdressBook)
 
 
 if __name__ == '__main__':
