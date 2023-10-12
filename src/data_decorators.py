@@ -1,8 +1,6 @@
 import re
 from datetime import datetime
 
-# Przy wprowadzaniu takich danych jak numer, telefonu, adresu e-mail czy daty urodzenia,
-#  ma wyskakiwac blad gdy dane beda nieprawidlowe.
 def validate_phone_number(func):
     def wrapper(*args, **kwargs):
         phone_number = args[2]

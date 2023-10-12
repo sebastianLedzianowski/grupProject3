@@ -4,15 +4,15 @@ from typing import List
 
 @dataclass
 class AdressBook:
-    imie: str
-    nazwisko: str
-    numer_telefonu: str
+    name: str
+    surname: str
+    phone_number: str
     email: str
-    data_urodzin: str
+    birthday: str
 
 
 @dataclass
 class NoteBook:
-    tytul: str
-    tresc: str
-    tagi: List[str]
+    title: str
+    content: str
+    tag: List[str]
