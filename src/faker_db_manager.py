@@ -3,7 +3,7 @@ from src.mongodb.models import AdressBook, NoteBook
 from faker import Faker
 import random
 
-fake = Faker()
+fake = Faker("pl_PL")
 baza_danych = DatabaseManager
 
 def faker_Notesbook():

@@ -55,7 +55,7 @@ class DatabaseManager:
         elif isinstance(value_type, NoteBook):
             collection = self.note_book
         else:
-            raise ValueError('Nie ma takiej bazy o danej nazwie.')
+            raise ValueError('There is no such database with a given name.')
 
         return collection.insert_one(asdict(value_type)).inserted_id
 
@@ -79,26 +79,26 @@ class DatabaseManager:
         elif value_type == NoteBook:
             collection = self.note_book
         else:
-            raise ValueError('Nie ma takiej bazy o danej nazwie.')
+            raise ValueError('There is no such database with a given name.')
 
         # Znajdz wszystrkie rekord z daną wartością
         records = list(collection.find({field: value}))
 
         if not records:
-            print(f'Nie znaleziuono żadnego rekordu z {field}: {value}')
+            print(f'No record was found from {field}: {value}')
             return
 
         if len(records) > 1:
-            print(f'Znaleziono kilka rekordów z {field}: {value}')
+            print(f'Several records were found from {field}: {value}')
             for i, record in enumerate(records, 1):
                 if value_type == AdressBook:
-                    print(f"{i}. {record['imie']} {record['nazwisko']} - {record['email']}")
+                    print(f"{i}. {record['name']} {record['surname']} - {record['email']}")
                 elif value_type == NoteBook:
-                    print(f"{i}. {record['tytul']} - Tagi: {', '.join(record['tagi'])}")
+                    print(f"{i}. {record['title']} - Tag: {', '.join(record['tag'])}")
 
-            choice = int(input(f'Wybierz numer rekordu do edycji (1-{len(records)}): '))
+            choice = int(input(f'Select the record number to edit (1-{len(records)}): '))
             if choice < 1 or choice > len(records):
-                print('Nieprawidłowy wybór.')
+                print('Invalid selection.')
                 return
             record_to_edit = records[choice - 1]
         else:
