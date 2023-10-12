@@ -1,5 +1,22 @@
 from src.mongodb.db_manager import DatabaseManager
 
+# Wszystkie zdaerzenia wykonane w tym programie maja byc zapisywane w pliku na dysku twardym.
+
+
+# Na pocztaku chcemy dodac nowy kontakt do naszej ksiazki kontaktow.
+# Kontakt ma sie skladac z Imienia i Nazwiska, numeru telefonu, adrsu e-mail oraz daty urodzin.
+# Kontakty musza byc zapisywane w zewnetrzym pliku.
+
+
+# Chcemy miec mozliwosc wyszukiwania kontaktow z naszej ksiazki telefonicznej.
+
+
+# Chcemy tez miec mozliwosc edytowania kontaktu.
+
+
+# Chcemy miec mozliwosc usuniecia kontaktu z naszej listy.
+
+
 # Przy wprowadzaniu takich danych jak numer, telefonu, adresu e-mail czy daty urodzenia,
 #  ma wyskakiwac blad gdy dane beda nieprawidlowe.
 
@@ -20,6 +37,7 @@ from src.mongodb.db_manager import DatabaseManager
 
 
 # Stworzenie interfejsu poruszania sie po terminalu.
+
 
 def main():
     DatabaseManager().show_all()
