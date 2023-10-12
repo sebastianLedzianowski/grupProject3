@@ -44,10 +44,6 @@ from src.models import AdressBook, NoteBook
 def main():
     #TEST
     db = DatabaseManager()
-    db.show_all(AdressBook)
-    print('\n')
-    db.show_all(NoteBook)
-
     #dodawanie danych do BD
 
     # dodanie do kolekcji adress_book
@@ -57,6 +53,17 @@ def main():
     # dodanie do kolekcji note_book
     # note = NoteBook(tytul="My Note", tresc="This is a note.", tagi=["tag1", "tag2"])
     # db.add(note)
+
+
+    # edycja danych w BD
+    # chcemy na przyklad zmienic numer telefonu dla Smith
+    # tworzymy slownik ze zmiana konkretnej danej.
+    # updates = {'numer_telefonu': '987654321'}
+    # # wprowadzeenie zmian w BD po nazwisku
+    # db.edit(AdressBook, 'nazwisko', 'Smith', updates)
+    # print('\n')
+
+    db.show_all(AdressBook)
 
 
 if __name__ == '__main__':
