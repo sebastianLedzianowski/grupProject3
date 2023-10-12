@@ -32,6 +32,7 @@ import re
 def main():
     #TEST
     db = DatabaseManager()
+    print(db.show_all(NoteBook))
     #dodawanie danych do BD
 
     # dodanie do kolekcji adress_book
@@ -50,8 +51,6 @@ def main():
     # # wprowadzeenie zmian w BD po nazwisku
     # db.edit(AdressBook, 'nazwisko', 'Smith', updates)
     # print('\n')
-
-    print(db.show_all(AdressBook))
 
 
 if __name__ == '__main__':
