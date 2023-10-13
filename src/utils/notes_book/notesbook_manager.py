@@ -2,7 +2,6 @@ from src.mongodb.db_connection import DatabaseConnectionManager
 from src.mongodb.db_repository import DataRepository
 
 
-
 class NotesBook:
     def __init__(self):
         self.db_manager = DatabaseConnectionManager()
@@ -10,7 +9,7 @@ class NotesBook:
 
     def create(self, note):
         pass
-
+    # dodawanie notatek.
 
     def read(self):
         pass
