@@ -1,25 +1,15 @@
 from src.mongodb.db_connection import DatabaseConnectionManager
 from src.mongodb.db_repository import DataRepository
 
-db_manager = DatabaseConnectionManager()
 
-class Note:
-    def __init__(self, title, tags, content):
-        self.title = title
-        self.tags = tags
-        self.content = content
 
 class NotesBook:
     def __init__(self):
-        self.data_repo = DataRepository(db_manager)
-
-    def input(self, title, tags, content):
-        note = Note(title, tags, content)
-        return note
+        self.db_manager = DatabaseConnectionManager()
+        self.data_repo = DataRepository(self.db_manager)
 
     def create(self, note):
-        self.data_repo.create(note)
-        print("Note created successfully.")
+        pass
 
 
     def read(self):
