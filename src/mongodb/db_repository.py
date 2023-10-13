@@ -18,7 +18,7 @@ class DataRepository:
         Select the appropriate database collection based on the data type.
 
         Args:
-        - value_type (Type[Union[AdressBook, NoteBook]]): The type of the data model.
+        - value_type (Type[Union[AddressBook, NoteBook]]): The type of the data model.
 
         Returns:
         - Collection: The selected database collection.
@@ -38,7 +38,7 @@ class DataRepository:
         Create a new entry in the database.
 
         Args:
-        - value_type (Union[AdressBook, NoteBook]): Instance of the data model to be added to the database.
+        - value_type (Union[AddressBook, NoteBook]): Instance of the data model to be added to the database.
 
         Returns:
         - ObjectId: The ID of the inserted database entry.
@@ -51,10 +51,10 @@ class DataRepository:
         Retrieve all entries from a collection in the database.
 
         Args:
-        - value_type (Type[Union[AdressBook, NoteBook]]): The type of the data model to determine the collection.
+        - value_type (Type[Union[AddressBook, NoteBook]]): The type of the data model to determine the collection.
 
         Returns:
-        - List[Union[AdressBook, NoteBook]]: A list of all entries in the collection.
+        - List[Union[AddressBook, NoteBook]]: A list of all entries in the collection.
         """
         collection = self._select_collection(value_type)
         return [i for i in collection.find()]
@@ -64,7 +64,7 @@ class DataRepository:
         Update an entry in the database.
 
         Args:
-        - value_type (Type[Union[AdressBook, NoteBook]]): The type of the data model to determine the collection.
+        - value_type (Type[Union[AddressBook, NoteBook]]): The type of the data model to determine the collection.
         - field (str): The name of the field to be used as a query.
         - value (str): The value to match against the query field.
         - updates (dict): A dictionary containing the update operators or document.
@@ -80,7 +80,7 @@ class DataRepository:
         Delete an entry from the database.
 
         Args:
-        - value_type (Type[Union[AdressBook, NoteBook]]): The type of the data model to determine the collection.
+        - value_type (Type[Union[AddressBook, NoteBook]]): The type of the data model to determine the collection.
         - field (str): The name of the field to be used as a query.
         - value (str): The value to match against the query field.
 
