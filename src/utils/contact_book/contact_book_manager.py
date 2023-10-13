@@ -38,4 +38,14 @@ class ContactBookManager:
             print(f"An error occurred: {str(e)}")
             return []
 
+    def get_sorted_contacts(self, sort_key) -> list:
+        try:
+            contacts = self.data_repo.read_all(AddressBook)
+            sorted_contacts = sorted(contacts, key=lambda x: x.get(sort_key))
+            return sorted_contacts
+        except Exception as e:
+            print(f"An error occurred: {str(e)}")
+            return []
+
+
 
