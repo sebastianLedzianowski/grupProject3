@@ -1,15 +1,6 @@
 from src.mongodb.db_connection import DatabaseConnectionManager
 from src.mongodb.db_repository import DataRepository
 from src.mongodb.models import AddressBook, NoteBook
-from src.utils.contact_book.contact_book_collector import ContactBookCollector
-from src.utils.contact_book.contact_book_manager import ContactBookManager
-from src.utils.notes_book.notesbook_collector import NotesBookCollector
-from src.utils.notes_book.notesbook_manager import NotesBookManager
-
-#user_data = ContactBookCollector().get_user_input()
-#ContactBookManager().add(user_data=user_data)
-user_data = NotesBookCollector().get_user_input()
-NotesBookManager().add(user_data=user_data)
 
 def read():
     # TEST
