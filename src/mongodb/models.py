@@ -3,7 +3,7 @@ from typing import List
 
 
 @dataclass
-class AdressBook:
+class AddressBook:
     name: str
     surname: str
     phone_number: str
