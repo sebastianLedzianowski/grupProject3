@@ -20,13 +20,19 @@ class NotesBookManager:
     # Wyswietlanie notatek po tytule, badz tagach.
 
     def sort(self):
-        pass
     # Sortowanie notatek po danym argumencie.
-
-    def edit(self):
         pass
+
+    def edit(self, field, value, new_value):
     # Edycja notatek
-
-    def delate(self):
-        pass
+        try:
+            self.data_repo.update(value_type=NoteBook, field=field, value=value, new_value=new_value)
+        except Exception as e:
+            print(f"An error occurred: {str(e)}")
+    
+    def delete(self, field, value):
     # Usuwanie notatek
+        try:
+            self.data_repo.delete(value_type=NoteBook, field=field, value=value)
+        except Exception as e:
+            print(f"An error occurred: {str(e)}")    

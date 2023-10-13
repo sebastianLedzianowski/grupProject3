@@ -8,8 +8,8 @@ from src.utils.notes_book.notesbook_manager import NotesBookManager
 
 #user_data = ContactBookCollector().get_user_input()
 #ContactBookManager().add(user_data=user_data)
-#user_data = NotesBookCollector().get_user_input()
-#NotesBookManager().add(user_data=user_data)
+user_data = NotesBookCollector().get_user_input()
+NotesBookManager().add(user_data=user_data)
 
 def read():
     # TEST
