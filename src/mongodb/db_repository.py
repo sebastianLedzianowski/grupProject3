@@ -43,7 +43,6 @@ class DataRepository:
         Returns:
         - ObjectId: The ID of the inserted database entry.
         """
-
         collection = self._select_collection(type(value_type))
         return collection.insert_one(asdict(value_type)).inserted_id
 
@@ -57,14 +56,36 @@ class DataRepository:
         Returns:
         - List[Union[AdressBook, NoteBook]]: A list of all entries in the collection.
         """
-
         collection = self._select_collection(value_type)
         return [i for i in collection.find()]
 
     def update(self, value_type: Type[Union[AddressBook, NoteBook]], field: str, value: str, updates: dict):
+        """
+        Update an entry in the database.
+
+        Args:
+        - value_type (Type[Union[AdressBook, NoteBook]]): The type of the data model to determine the collection.
+        - field (str): The name of the field to be used as a query.
+        - value (str): The value to match against the query field.
+        - updates (dict): A dictionary containing the update operators or document.
+
+        Returns:
+        - UpdateResult: The result of the update operation.
+        """
         collection = self._select_collection(value_type)
         return collection.update_one({field: value}, {'$set': updates})
 
     def delete(self, value_type: Type[Union[AddressBook, NoteBook]], field: str, value: str):
+        """
+        Delete an entry from the database.
+
+        Args:
+        - value_type (Type[Union[AdressBook, NoteBook]]): The type of the data model to determine the collection.
+        - field (str): The name of the field to be used as a query.
+        - value (str): The value to match against the query field.
+
+        Returns:
+        - DeleteResult: The result of the delete operation.
+        """
         collection = self._select_collection(value_type)
         return collection.delete_one({field: value})
