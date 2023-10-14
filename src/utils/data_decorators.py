@@ -3,12 +3,17 @@ from datetime import datetime
 
 def validate_phone_number(func):
     def wrapper(*args, **kwargs):
-        phone_number = args[2]
-        pattern = r"(\+[4][8]\s)?\d{3}\s\d{3}\s\d{3}"
-        if re.match(pattern, phone_number):
-            return func(*args, **kwargs)
+        phone_number_index = 2
+        if phone_number_index < len(args):
+            phone_number = args[phone_number_index]
+            pattern = r"(\+[4][8]\s)?\d{3}\s\d{3}\s\d{3}"
+            if re.match(pattern, phone_number):
+                return func(*args, **kwargs)
+            else:
+                return f'Wrong phone number. Sample number: "123 456 789" or "+48 123 456 789"'
         else:
-            return f'Wrong phone number. Sample number: "123 456 789" or "+48 123 456 789"'
+            return 'Phone number is missing in the input.'
+
     return wrapper
 
 def validate_e_mail(func):

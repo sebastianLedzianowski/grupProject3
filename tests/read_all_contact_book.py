@@ -5,8 +5,8 @@ def read_all_contact_book():
     contacts = contact_manager.read_all()
     if contacts:
         print(f"Here is the contact list:")
-        for contant in contacts:
-            print(contant)
+        for contact in contacts:
+            print(contact)
     else:
         print(f'No contacts in the database.')
 if __name__ == '__main__':
