@@ -1,10 +1,6 @@
-from src.mongodb.db_connection import DatabaseConnectionManager
-from src.mongodb.db_repository import DataRepository
-from src.mongodb.models import AddressBook
 from datetime import datetime
 
-db_manager = DatabaseConnectionManager()
-data_repo = DataRepository(db_manager)
+
 
 
 # stwórz funkcje ktora pobiera dane z książki kontaktów.

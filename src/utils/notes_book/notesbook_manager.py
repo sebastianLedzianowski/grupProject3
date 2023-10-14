@@ -15,11 +15,14 @@ class NotesBookManager:
         except Exception as e:
             print(f"An error occurred: {str(e)}")
 
-    def read(self):
-        pass
-    # Wyswietlanie notatek po tytule, badz tagach.
-
-    def sort(self):
+    def read_all(self):
+        try:
+            all_documents = self.data_repo.read_all(NoteBook)
+            return list(all_documents)
+        except Exception as e:
+            print(f"An error occurred: {str(e)}")
+            return []
+    def sorted(self):
         pass
     # Sortowanie notatek po danym argumencie.
 
