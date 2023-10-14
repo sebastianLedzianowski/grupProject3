@@ -11,7 +11,7 @@ db_manager = DatabaseConnectionManager()
 data_repo = DataRepository(db_manager)
 
 
-def faker_Notesbook():
+def faker_notes_book():
     for _ in range(5):
         rekord = NoteBook(
             title=fake.sentence(),
@@ -23,7 +23,7 @@ def faker_Notesbook():
               f"Content: {rekord.content}\n")
 
 
-def faker_AdressBook():
+def faker_adress_book():
     for _ in range(5):
         rekord = AddressBook(
             name=fake.first_name(),
@@ -36,8 +36,8 @@ def faker_AdressBook():
         ContactBookManager().create(rekord)
 
 if __name__ == '__main__':
-    faker_AdressBook()
+    faker_adress_book()
     print()
     print('-'*140)
     print()
-    faker_Notesbook()
+    faker_notes_book()

@@ -22,6 +22,7 @@ class NotesBookManager:
         except Exception as e:
             print(f"An error occurred: {str(e)}")
             return []
+
     def sorted(self):
         pass
     # Sortowanie notatek po danym argumencie.
