@@ -4,11 +4,11 @@ from datetime import datetime
 def validate_phone_number(func):
     def wrapper(*args, **kwargs):
         phone_number = args[2]
-        pattern = r"\d{9}"
+        pattern = r'^(\+?48\s?)?(\d{3}\s?\d{3}\s?\d{3}|\d{2}\s?\d{3}\s?\d{2}\s?\d{2})$'
         if re.match(pattern, phone_number):
             return func(*args, **kwargs)
         else:
-            return f'Wrong phone number. Sample number: "123456789"'
+            return f'Wrong phone number. Sample number: "123 456 789" or "+48 123 456 789"'
     return wrapper
 
 def validate_e_mail(func):
