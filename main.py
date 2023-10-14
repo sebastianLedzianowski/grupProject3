@@ -1,11 +1,6 @@
 from src.mongodb.db_connection import DatabaseConnectionManager
 from src.mongodb.db_repository import DataRepository
 from src.mongodb.models import AddressBook, NoteBook
-from src.utils.contact_book.contact_book_collector import ContactBookCollector
-from src.utils.contact_book.contact_book_manager import ContactBookManager
-
-user_data = ContactBookCollector().get_user_input()
-ContactBookManager().add(user_data=user_data)
 
 def read():
     # TEST
@@ -25,7 +20,7 @@ def read():
 
 # Główna funkcja obsługująca interakcję z użytkownikiem.
 def main():
-      # Inicjalizacja NotesBook oraz ContactBook
+    # Inicjalizacja NotesBook oraz ContactBook
 
     # Pętla while pozwala na ciągłe interakcje z użytkownikiem, aż do momentu zakończenia programu.
     while True:
@@ -42,7 +37,7 @@ def main():
         # Każda opcja jest obsługiwana przez odpowiednią funkcję klasy.
 
         # Po zakończeniu wybranej operacji, program wraca do menu głównego.
-
+        break
 
 if __name__ == '__main__':
-    read()
+    pass
