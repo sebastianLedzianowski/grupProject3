@@ -6,8 +6,7 @@ def read_all_contact_book():
     if contacts:
         print(f"Here is the contact list:")
         for contant in contacts:
-            print(f'Name: {contant["name"]}, Surname: {contant["surname"]}, Phone number:{contant["phone_number"]}, '
-                  f'Email: {contant["email"]}, Birthday: {contant["birthday"]}')
+            print(contant)
     else:
         print(f'No contacts in the database.')
 if __name__ == '__main__':

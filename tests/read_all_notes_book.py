@@ -6,7 +6,7 @@ def read_all_notes_book():
     if notes:
         print(f"here is the contact list:")
         for note in notes:
-            print(f'Title: {note["title"]}, Tag: {note["tag"]}, Content: {note["content"]}')
+            print(note)
     else:
         print(f'No notes in the database.')
 

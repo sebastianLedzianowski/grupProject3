@@ -4,7 +4,7 @@ from datetime import datetime
 def validate_phone_number(func):
     def wrapper(*args, **kwargs):
         phone_number = args[2]
-        pattern = r'^(\+?48\s?)?(\d{3}\s?\d{3}\s?\d{3}|\d{2}\s?\d{3}\s?\d{2}\s?\d{2})$'
+        pattern = r'^(\+48\s)?\d{3}\s\d{3}\s\d{3}$'
         if re.match(pattern, phone_number):
             return func(*args, **kwargs)
         else:
