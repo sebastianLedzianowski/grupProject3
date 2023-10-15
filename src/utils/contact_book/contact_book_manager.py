@@ -1,12 +1,16 @@
 from src.mongodb.db_connection import DatabaseConnectionManager
 from src.mongodb.db_repository import DataRepository
 from src.mongodb.models import AddressBook
+from dotenv import load_dotenv
+import requests
+import os
 
 
 class ContactBookManager:
     def __init__(self):
         self.db_manager = DatabaseConnectionManager()
         self.data_repo = DataRepository(self.db_manager)
+        load_dotenv()
 
     def create(self, user_data):
         try:
@@ -46,3 +50,11 @@ class ContactBookManager:
         except Exception as e:
             print(f"An error occurred: {str(e)}")
             return []
+
+    @staticmethod
+    def get_birthday_wish(name):
+        url = os.getenv("BIRTHDAY_URL")
+        data = {"name": name}
+        headers = {"Content-Type": "application/json"}
+        response = requests.post(url, json=data, headers=headers)
+        return response
