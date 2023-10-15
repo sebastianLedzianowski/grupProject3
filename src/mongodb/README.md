@@ -1,5 +1,12 @@
 # MongoDB Module Documentation
 
+The MongoDB module in the repository provides a structured approach to manage and interact with MongoDB databases, specifically tailored for handling address book and notebook entries. The module is structured into various Python files, each encapsulating a specific functionality or data model to ensure a clean and maintainable codebase.
+
+Key Components:
+- Data Models: Defined in models.py, this file contains data classes (AddressBook and NoteBook) that represent the schema of the address book and notebook entries, respectively.
+- Database Connection Manager: Implemented in db_connection.py, this file provides a DatabaseConnectionManager class that manages connections and operations with the MongoDB database, ensuring a single point of interaction with the database.
+- Data Repository: Found in db_repository.py, this file introduces the DataRepository class which offers methods for performing CRUD (Create, Read, Update, Delete) operations on the MongoDB collections, abstracting the database interaction logic.
+
 ---
 
 ## [models.py](https://github.com/sebastianLedzianowski/grupProject3/blob/main/src/mongodb/models.py)
