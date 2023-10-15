@@ -1,7 +1,7 @@
 from src.mongodb.db_connection import DatabaseConnectionManager
 from src.mongodb.db_repository import DataRepository
 from src.mongodb.models import AddressBook
-
+from datetime import datetime, timedelta, date
 
 class ContactBookManager:
     def __init__(self):
@@ -46,6 +46,30 @@ class ContactBookManager:
         except Exception as e:
             print(f"An error occurred: {str(e)}")
             return []
+
+    def get_days_to_birthday(self):
+        today = date.today()
+        today_to_30 = today + timedelta(days=30)
+        contacts = self.data_repo.read_all(AddressBook)
+        upcoming_birthdays = []
+        for contact in contacts:
+            birthday = datetime.strptime(contact["birthday"], "%Y-%m-%d")
+            upcoming_birthday = date(today.year, birthday.month, birthday.day)
+            age = today.year - birthday.year - ((today.month, today.day) < (birthday.month, birthday.day))
+            days_to_birthdays = (upcoming_birthday - today).days
+            if today.day == birthday.day and today.month == birthday.month:
+                upcoming_birthdays.append({"name": contact["name"],
+                                           "surname": contact["surname"],
+                                           "birthday": contact["birthday"],
+                                           "days_to_birthday": days_to_birthdays
+                                           })
+            if today <= upcoming_birthday <= today_to_30:
+                upcoming_birthdays.append({"name": contact["name"],
+                                           "surname": contact["surname"],
+                                           "birthday": contact["birthday"],
+                                           "days_to_birthday": days_to_birthdays
+                                           })
+        return upcoming_birthdays
 
 
 
