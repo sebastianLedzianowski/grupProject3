@@ -54,12 +54,9 @@ def contact_menu(contact_book_manager):
             else:
                 print("\n=== Contacts ===")
                 for contact in contacts:
-                    print(f"Name: {contact['name']}")
-                    print(f"Surname: {contact['surname']}")
-                    print(f"Phone Number: {contact['phone_number']}")
-                    print(f"Email: {contact['email']}")
-                    print(f"Birthday: {contact['birthday']}")
-                    print("-------------------")
+                    print(
+                        "Name: {name}\nSurname: {surname}\nPhone Number: {phone_number}\nEmail: {email}\nBirthday: {birthday}\n-------------------"
+                        .format(**contact))
         elif contact_choice == 2:
             user_data = ContactBookCollector.get_user_input()
             contact_book_manager.create(user_data)
@@ -80,12 +77,9 @@ def contact_menu(contact_book_manager):
             else:
                 print("\n=== Sorted Contacts ===")
                 for contact in sorted_contacts:
-                    print(f"Name: {contact['name']}")
-                    print(f"Surname: {contact['surname']}")
-                    print(f"Phone Number: {contact['phone_number']}")
-                    print(f"Email: {contact['email']}")
-                    print(f"Birthday: {contact['birthday']}")
-                    print("-------------------")
+                    print(
+                        "Name: {name}\nSurname: {surname}\nPhone Number: {phone_number}\nEmail: {email}\nBirthday: {birthday}\n-------------------"
+                        .format(**contact))
         elif contact_choice == 6:
             print("Back to Main Menu.")
             break
@@ -116,10 +110,8 @@ def notes_menu(notes_book_manager):
             else:
                 print("\n=== Notes ===")
                 for note in notes:
-                    print(f"Title: {note['title']}")
-                    print(f"Tag: {note['tag']}")
-                    print(f"Content: {note['content']}")
-                    print("-------------------")
+                    print("Title: {title}\nTag: {tag}\nContent: {content}\n-------------------"
+                          .format(**note))
         elif notes_choice == 2:
             user_data = NotesBookCollector.get_user_input()
             notes_book_manager.create(user_data)
@@ -140,10 +132,8 @@ def notes_menu(notes_book_manager):
             else:
                 print("\n=== Sorted Notes ===")
                 for note in sorted_notes:
-                    print(f"Title: {note['title']}")
-                    print(f"Tag: {note['tag']}")
-                    print(f"Content: {note['content']}")
-                    print("-------------------")
+                    print("Title: {title}\nTag: {tag}\nContent: {content}\n-------------------"
+                          .format(**note))
         elif notes_choice == 6:
             print("Back to Main Menu.")
             break
