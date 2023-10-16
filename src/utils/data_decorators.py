@@ -1,37 +1,48 @@
 import re
 from datetime import datetime
 
+def validate_input(prompt):
+    def decorator(func):
+        def wrapper():
+            while True:
+                user_input = input(prompt)
+                if user_input.strip():
+                    return user_input
+                else:
+                    print("Invalid input. Please try again.")
+        return wrapper
+    return decorator
+
+
 def validate_phone_number(func):
-    def wrapper(*args, **kwargs):
-        phone_number_index = 2
-        if phone_number_index < len(args):
-            phone_number = args[phone_number_index]
+    def wrapper():
+        while True:
+            phone_number = input('Enter phone number: ')
             pattern = r"(\+[4][8]\s)?\d{3}\s\d{3}\s\d{3}"
             if re.match(pattern, phone_number):
-                return func(*args, **kwargs)
+                return phone_number
             else:
-                return f'Wrong phone number. Sample number: "123 456 789" or "+48 123 456 789"'
-        else:
-            return 'Phone number is missing in the input.'
-
+                print('Wrong phone number format. Sample number: "123 456 789" or "+48 123 456 789"')
     return wrapper
 
-def validate_e_mail(func):
-    def wrapper(*args, **kwargs):
-        e_mail = args[3]
-        pattern = r"[a-zA-z._]+[\w.'']+@\w+[.]\w+\w+"
-        if re.match(pattern, e_mail):
-            return func(*args, **kwargs)
-        else:
-            return f'Bad email. Example email address: "silmple_adres@ios.com"'
+def validate_email(func):
+    def wrapper():
+        while True:
+            email = input('Enter email: ')
+            pattern = r"[a-zA-Z._]+[\w.'']+@\w+[.]\w+\w+"
+            if re.match(pattern, email):
+                return email
+            else:
+                print('Invalid email address. Example email: "silmple_adres@example.com"')
     return wrapper
 
-def is_valid_date(func):
-    def wrapper(*args, **kwargs):
-        birthday = args[4]
-        try:
-            datetime.strptime(birthday, '%Y-%m-%d')
-            return func(*args, **kwargs)
-        except ValueError:
-            return f'Wrong date of birth. Correct format "yyyy-mm-dd"'
+def validate_date(func):
+    def wrapper():
+        while True:
+            birthday = input('Enter birthday [YYYY-MM-DD]: ')
+            try:
+                datetime.strptime(birthday, '%Y-%m-%d')
+                return birthday
+            except ValueError:
+                print('Wrong date format. Correct format is "YYYY-MM-DD"')
     return wrapper

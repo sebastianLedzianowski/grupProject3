@@ -13,10 +13,6 @@ def send_email(email, title, content):
     port = 465
     context = ssl.create_default_context()
 
-# ssl.SSLCertVerificationError: [SSL: CERTIFICATE_VERIFY_FAILED]
-# certificate verify failed: unable to get local issuer certificate (_ssl.c:1002)
-# sudo /Applications/Python\ 3.11/Install\ Certificates.command
-
     em = EmailMessage()
     em['From'] = name
     em['To'] = email
@@ -30,5 +26,3 @@ def send_email(email, title, content):
         print('Email sent successfully!')
     except Exception as e:
         print(f'Failed to send email. Error: {e}')
-
-

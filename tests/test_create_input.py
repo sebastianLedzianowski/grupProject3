@@ -2,7 +2,6 @@ from src.utils.contact_book.contact_book_collector import ContactBookCollector
 from src.utils.contact_book.contact_book_manager import ContactBookManager
 from src.utils.notes_book.notesbook_collector import NotesBookCollector
 from src.utils.notes_book.notesbook_manager import NotesBookManager
-from src.utils.data_decorators import *
 
 # @validate_phone_number
 def test_add_contact():

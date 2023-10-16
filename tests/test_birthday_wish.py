@@ -17,5 +17,5 @@ def test_get_birthday_wish(name):
         print(f"An error occurred while decoding JSON: {str(e)}")
         return []
 
-
-test_get_birthday_wish('Barbara')
+if __name__ == '__main__':
+    test_get_birthday_wish('Barbara')
