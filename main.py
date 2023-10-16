@@ -4,12 +4,13 @@ from src.utils.contact_book.contact_book_collector import ContactBookCollector
 from src.utils.notes_book.notesbook_collector import NotesBookCollector
 
 
-
 def main():
     contact_book_manager = ContactBookManager()
     notes_book_manager = NotesBookManager()
 
     while True:
+        print("\n===== Main Menu =====")
+        print("1. Manage Contacts")
         print("2. Manage Notes")
         print("3. Exit Program")
 
@@ -29,6 +30,7 @@ def main():
         else:
             print("Invalid choice. Choose an option from 1 to 3.")
 
+
 def contact_menu(contact_book_manager):
     while True:
         print("\n===== Manage Contacts =====")
@@ -46,7 +48,18 @@ def contact_menu(contact_book_manager):
             continue
 
         if contact_choice == 1:
-            contact_book_manager.read_all()
+            contacts = contact_book_manager.read_all()
+            if not contacts:
+                print("No contacts found.")
+            else:
+                print("\n=== Contacts ===")
+                for contact in contacts:
+                    print(f"Name: {contact['name']}")
+                    print(f"Surname: {contact['surname']}")
+                    print(f"Phone Number: {contact['phone_number']}")
+                    print(f"Email: {contact['email']}")
+                    print(f"Birthday: {contact['birthday']}")
+                    print("-------------------")
         elif contact_choice == 2:
             user_data = ContactBookCollector.get_user_input()
             contact_book_manager.create(user_data)
@@ -62,13 +75,23 @@ def contact_menu(contact_book_manager):
         elif contact_choice == 5:
             sort_key = input("Enter the field to sort contacts by (e.g., name): ")
             sorted_contacts = contact_book_manager.get_sorted_contacts(sort_key)
-            for contact in sorted_contacts:
-                print(contact)
+            if not sorted_contacts:
+                print("No contacts found.")
+            else:
+                print("\n=== Sorted Contacts ===")
+                for contact in sorted_contacts:
+                    print(f"Name: {contact['name']}")
+                    print(f"Surname: {contact['surname']}")
+                    print(f"Phone Number: {contact['phone_number']}")
+                    print(f"Email: {contact['email']}")
+                    print(f"Birthday: {contact['birthday']}")
+                    print("-------------------")
         elif contact_choice == 6:
             print("Back to Main Menu.")
             break
         else:
             print("Invalid choice. Choose an option from 1 to 6.")
+
 
 def notes_menu(notes_book_manager):
     while True:
@@ -87,7 +110,16 @@ def notes_menu(notes_book_manager):
             continue
 
         if notes_choice == 1:
-            notes_book_manager.read_all()
+            notes = notes_book_manager.read_all()
+            if not notes:
+                print("No notes found.")
+            else:
+                print("\n=== Notes ===")
+                for note in notes:
+                    print(f"Title: {note['title']}")
+                    print(f"Tag: {note['tag']}")
+                    print(f"Content: {note['content']}")
+                    print("-------------------")
         elif notes_choice == 2:
             user_data = NotesBookCollector.get_user_input()
             notes_book_manager.create(user_data)
@@ -103,13 +135,21 @@ def notes_menu(notes_book_manager):
         elif notes_choice == 5:
             sort_key = input("Enter the field to sort notes by (e.g., title): ")
             sorted_notes = notes_book_manager.sorted(sort_key)
-            for note in sorted_notes:
-                print(note)
+            if not sorted_notes:
+                print("No notes found.")
+            else:
+                print("\n=== Sorted Notes ===")
+                for note in sorted_notes:
+                    print(f"Title: {note['title']}")
+                    print(f"Tag: {note['tag']}")
+                    print(f"Content: {note['content']}")
+                    print("-------------------")
         elif notes_choice == 6:
             print("Back to Main Menu.")
             break
         else:
             print("Invalid choice. Choose an option from 1 to 6.")
+
 
 if __name__ == '__main__':
     main()
