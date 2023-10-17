@@ -54,7 +54,8 @@ def contact_menu(contact_book_manager):
             else:
                 template = "| {:^17} | {:^17} | {:^17} | {:^30} | {:^15} |"
                 header = " Contacts "
-                print("\n{:-^90}".format(header.center(90)))
+                print("{:^90}".format(header.center(110)))
+                print("")
                 print(template.format("Name", "Surname", "Phone number", "Email", "Birthday"))
                 for contact in contacts:
                     formatted_template = template.format(contact["name"], contact["surname"], contact["phone_number"],
@@ -64,6 +65,7 @@ def contact_menu(contact_book_manager):
         elif contact_choice == 2:
             user_data = ContactBookCollector.get_user_input()
             contact_book_manager.create(user_data)
+            print("Contact added successfully.")
         elif contact_choice == 3:
             print("\n===== Edit Contact =====")
             print("1. Edit by Name")
@@ -90,25 +92,66 @@ def contact_menu(contact_book_manager):
             else:
                 print("Invalid choice. Choose an option from 1 to 6.")
         elif contact_choice == 4:
-            field = input("Enter the field to delete (e.g., name): ")
-            value = input("Enter the value of the field to delete: ")
-            contact_book_manager.delete(field, value)
+                print("\n===== Delete Contact =====")
+                print("1. Delete by Name")
+                print("2. Delete by Surname")
+                print("3. Delete by Phone number")
+                print("4. Delete by Email")
+                print("5. Delete by Birthday")
+                print("6. Back to Manage Contacts")
+
+                try:
+                    delete_choice = int(input("Choose delete option (1/2/3/4/5/6): "))
+                except ValueError:
+                    print("Error! Enter a number.")
+                    continue
+
+                if delete_choice in range(1, 6):
+                    fields = ["Name", "Surname", "Phone number", "Email", "Birthday"]
+                    field = fields[delete_choice - 1]
+                    value = input(f"Enter the value of the {field} to delete: ")
+                    contact_book_manager.delete(field, value)
+                elif delete_choice == 6:
+                    print("Back to Manage Contacts.")
+                else:
+                    print("Invalid choice. Choose an option from 1 to 6.")
         elif contact_choice == 5:
-            sort_key = input("Enter the field to sort contacts by (e.g., name): ")
-            sorted_contacts = contact_book_manager.get_sorted_contacts(sort_key)
-            if not sorted_contacts:
-                print("No contacts found.")
-            else:
-                template = "| {:^17} | {:^17} | {:^17} | {:^30} | {:^15} |"
-                header = " Contacts "
-                print("\n{:-^90}".format(header.center(90)))
-                print(template.format("Name", "Surname", "Phone number", "Email", "Birthday"))
-                for contact in sorted_contacts:
-                    formatted_template = template.format(
-                        contact["name"], contact["surname"], contact["phone_number"], contact["email"], contact["birthday"]
-                    )
-                    print("-" * len(formatted_template))
-                    print(formatted_template)
+                print("\n===== Sort Contacts =====")
+                print("1. Sort by Name")
+                print("2. Sort by Surname")
+                print("3. Sort by Phone number")
+                print("4. Sort by Email")
+                print("5. Sort by Birthday")
+                print("6. Back to Manage Contacts")
+
+                try:
+                    sort_choice = int(input("Choose sort option (1/2/3/4/5/6): "))
+                except ValueError:
+                    print("Error! Enter a number.")
+                    continue
+
+                if sort_choice in range(1, 6):
+                    fields = ["Name", "Surname", "Phone number", "Email", "Birthday"]
+                    sort_key = fields[sort_choice - 1]
+                    sorted_contacts = contact_book_manager.get_sorted_contacts(sort_key)
+                    if not sorted_contacts:
+                        print("No contacts found.")
+                    else:
+                        template = "| {:^17} | {:^17} | {:^17} | {:^30} | {:^15} |"
+                        header = f" Sorted Contacts by {sort_key} "
+                        print("\n{:-^90}".format(header.center(90)))
+                        print(template.format("Name", "Surname", "Phone number", "Email", "Birthday"))
+                        for contact in sorted_contacts:
+                            formatted_template = template.format(
+                                contact["name"], contact["surname"], contact["phone_number"], contact["email"],
+                                contact["birthday"]
+                            )
+                            print("-" * len(formatted_template))
+                            print(formatted_template)
+                elif sort_choice == 6:
+                    print("Back to Manage Contacts.")
+                else:
+                    print("Invalid choice. Choose an option from 1 to 6.")
         elif contact_choice == 6:
             print("Back to Main Menu.")
             break
@@ -140,11 +183,17 @@ def notes_menu(notes_book_manager):
                 template = "| {:^20} | {:^20} | {:^40} |"
                 header = " Notes "
                 print("\n{:-^90}".format(header.center(90)))
-                print(template.format("Title", "Tag", "Content"))
+                print(template.format("Title", "Content", "Tags"))
                 for note in notes:
-                    formatted_template = template.format(note["title"], note["tag"], note["content"])
-                    print("-" * len(formatted_template))
-                    print(formatted_template)
+                    if isinstance(note, dict):
+                        title = note.get("title", "")
+                        content = note.get("content", "")
+                        tags = ", ".join(note.get("tag", []))
+                        formatted_template = template.format(title, content, tags)
+                        print("-" * len(formatted_template))
+                        print(formatted_template)
+                    else:
+                        print("Invalid note format.")
         elif notes_choice == 2:
             user_data = NotesBookCollector.get_user_input()
             notes_book_manager.create(user_data)
@@ -172,23 +221,67 @@ def notes_menu(notes_book_manager):
             else:
                 print("Invalid choice. Choose an option from 1 to 4.")
         elif notes_choice == 4:
-            field = input("Enter the field to delete (e.g., title): ")
-            value = input("Enter the value of the field to delete: ")
-            notes_book_manager.delete(field, value)
+                print("\n===== Delete Note =====")
+                print("1. Delete by Title")
+                print("2. Delete by Tag")
+                print("3. Delete by Content")
+                print("4. Back to Manage Notes")
+
+                try:
+                    delete_choice = int(input("Choose delete option (1/2/3/4): "))
+                except ValueError:
+                    print("Error! Enter a number.")
+                    continue
+
+                if delete_choice in range(1, 4):
+                    fields = ["Title", "Tag", "Content"]
+                    field = fields[delete_choice - 1]
+                    value = input(f"Enter the value of the {field} to delete: ")
+                    notes_book_manager.delete(field, value)
+                elif delete_choice == 4:
+                    print("Back to Manage Notes.")
+                else:
+                    print("Invalid choice. Choose an option from 1 to 4.")
         elif notes_choice == 5:
-            sort_key = input("Enter the field to sort notes by (e.g., title): ")
-            sorted_notes = notes_book_manager.sorted(sort_key)
-            if not sorted_notes:
-                print("No notes found.")
+            print("\n===== Sort Notes =====")
+            print("1. Sort by Title")
+            print("2. Sort by Tag")
+            print("3. Sort by Content")
+            print("4. Back to Manage Notes")
+
+            try:
+                sort_choice = int(input("Choose sort option (1/2/3/4): "))
+            except ValueError:
+                print("Error! Enter a number.")
+                continue
+
+            if sort_choice in range(1, 4):
+                fields = ["Title", "Tag", "Content"]
+                sort_key = fields[sort_choice - 1]
+                sorted_notes = notes_book_manager.sorted(sort_key)
+                if not sorted_notes:
+                    print("No notes found.")
+                else:
+                    template = "| {:^20} | {:^20} | {:^40} |"
+                    header = f" Sorted Notes by {sort_key} "
+                    print("\n{:-^90}".format(header.center(90)))
+                    print(template.format("Title", "Tag", "Content"))
+                    for note in sorted_notes:
+                        if isinstance(note, dict):
+                            title = note.get("title", "")
+                            content = note.get("content", "")
+                            tags = ", ".join(note.get("tag", []))
+                            formatted_template = template.format(title, content, tags)
+                            print("-" * len(formatted_template))
+                            print(formatted_template)
+                        else:
+                            print("Invalid note format.")
+            elif sort_choice == 4:
+                print("Back to Manage Notes.")
             else:
-                template = "| {:^20} | {:^20} | {:^40} |"
-                header = " Sorted Notes "
-                print("\n{:-^90}".format(header.center(90)))
-                print(template.format("Title", "Tag", "Content"))
-                for note in sorted_notes:
-                    formatted_template = template.format(note["title"], note["tag"], note["content"])
-                    print("-" * len(formatted_template))
-                    print(formatted_template)
+                print("Invalid choice. Choose an option from 1 to 4.")
+
+
         elif notes_choice == 6:
             print("Back to Main Menu.")
             break

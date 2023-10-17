@@ -24,7 +24,7 @@ class ContactBookManager:
 
     def edit(self, field, value, updates):
         try:
-            self.data_repo.update(value_type=AddressBook, field=field, value=value, updates=updates)
+            self.data_repo.update(value_type=AddressBook, field=field, value=value, updates={"$set": {field: updates}})
         except Exception as e:
             print(f"An error occurred: {str(e)}")
 
@@ -45,7 +45,7 @@ class ContactBookManager:
     def get_sorted_contacts(self, sort_key) -> list:
         try:
             contacts = self.data_repo.read_all(AddressBook)
-            sorted_contacts = sorted(contacts, key=lambda x: x.get(sort_key))
+            sorted_contacts = sorted(contacts, key=lambda x: x.get(sort_key, ""))
             return sorted_contacts
         except Exception as e:
             print(f"An error occurred: {str(e)}")
