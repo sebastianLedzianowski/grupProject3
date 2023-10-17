@@ -1,4 +1,4 @@
-# Personal Assistant
+# 🐔Personal Assistant
 
 A contact and notes management system integrated with MongoDB.
 
@@ -11,7 +11,7 @@ A contact and notes management system integrated with MongoDB.
 - [Contribution](#contribution)
 - [License](#license)
 
-## Features
+## 👾Features
 
 - **MongoDB Integration**: Store and manage contacts and notes in a MongoDB database.
 - **Contact Management**: Add, edit, delete, and view contacts with fields like name, surname, phone number, email, and birthday.
@@ -20,14 +20,14 @@ A contact and notes management system integrated with MongoDB.
 - **Data Validation**: Ensure valid input for phone numbers, emails, and dates using decorators.
 - **Faker Integration**: Generate fake data for testing and demonstration purposes.
 
-## Installation
+## 🧑‍🔬Installation
 
 1. **Clone the Repository**: `git clone https://github.com/sebastianLedzianowski/grupProject3.git`
 2. **Navigate to the Project Directory**: `cd grupProject3`
 3. **Install Required Dependencies**: `pip install -r requirements.txt`
 
 
-## Configuration
+## 🛠️Configuration
 
 **Environment Variables**: Set up your `.env` file in the root directory with the following variables:
 ```bash
@@ -53,11 +53,11 @@ EMAIL_PASSWD=
 1. **Execute the Main Script**: `python main.py`
 2. Follow the on-screen prompts to manage contacts and notes.
 
-## Contribution
+## 🤝Contribution
 
 - We welcome all contributors! Please make sure to update tests as appropriate.
 - Kindly ensure you maintain the coding standards and practices established throughout the project.
 
-## License
+## 🗒️License
 
 The project is licensed under the [MIT License](LICENSE). For detailed information, please refer to the [LICENSE](LICENSE) file.
