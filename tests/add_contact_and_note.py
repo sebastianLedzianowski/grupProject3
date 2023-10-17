@@ -11,10 +11,10 @@ def test_add_contact():
 
 def test_add_note():
     user_data = NotesBookCollector().get_user_input()
-    new_note = NotesBookManager()(user_data=user_data)
+    NotesBookManager().create(user_data=user_data)
 
 
 if __name__ == '__main__':
     #test_add_contact()
-    test_add_note()
+    #test_add_note()
     pass
