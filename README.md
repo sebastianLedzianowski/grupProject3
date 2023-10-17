@@ -29,7 +29,7 @@ A contact and notes management system integrated with MongoDB.
 
 ## Configuration
 
-**Environment Variables**: Set up your .env file in the root directory with the following variables:
+**Environment Variables**: Set up your `.env` file in the root directory with the following variables:
 ```bash
 # Mongodb settings
 DB_PORT=
@@ -43,6 +43,11 @@ EMAIL_USER=
 EMAIL_PASSWD=
 ```
 
+---
+
+**Note**: Ensure to keep your `.env` file secure and never commit it to the repository to protect sensitive information.
+
+---
 ## Usage
 
 1. **Execute the Main Script**: `python main.py`
