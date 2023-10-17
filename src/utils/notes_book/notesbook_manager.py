@@ -23,13 +23,20 @@ class NotesBookManager:
             print(f"An error occurred: {str(e)}")
             return []
 
-    def sorted(self):
-        pass
-    # Sortowanie notatek po danym argumencie.
-
-    def edit(self, field, value, new_value):
+    def sorted(self, sort_key) -> list:
         try:
-            self.data_repo.update(value_type=NoteBook, field=field, value=value, new_value=new_value)
+            notes = self.data_repo.read_all(NoteBook)
+        except Exception as e:
+            print(f"An error occurred: {str(e)}")
+            return []
+
+        sorted_notes = sorted(notes, key=lambda x: x.get(sort_key, ''))
+
+        return sorted_notes
+
+    def edit(self, field, value, updates):
+        try:
+            self.data_repo.update(value_type=NoteBook, field=field, value=value, updates={"$set": updates})
         except Exception as e:
             print(f"An error occurred: {str(e)}")
     
