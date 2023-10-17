@@ -12,18 +12,18 @@ data_repo = DataRepository(db_manager)
 
 def faker_notes_book():
     notes_manager = NotesBookManager()
-    for _ in range(5):
+    for _ in range(20):
         dictionary_record = {
             'title': fake.sentence(),
             'tag': [fake.word() for _ in range(random.randint(1, 5))],
             'content': fake.paragraph()
         }
         print(dictionary_record)
-        # notes_manager.create(user_data=dictionary_record)
+        notes_manager.create(user_data=dictionary_record)
 
 def faker_contacts_book():
     contacts_manager = ContactBookManager()
-    for _ in range(5):
+    for _ in range(20):
         dictionary_record = {
             'name': fake.first_name(),
             'surname': fake.last_name(),
@@ -32,7 +32,7 @@ def faker_contacts_book():
             'birthday': fake.date_of_birth(minimum_age=18, maximum_age=50).strftime('%Y-%m-%d'),
         }
         print(dictionary_record)
-        # contacts_manager.create(user_data=dictionary_record)
+        contacts_manager.create(user_data=dictionary_record)
 
 if __name__ == '__main__':
     faker_notes_book()
