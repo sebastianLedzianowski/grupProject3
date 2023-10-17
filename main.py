@@ -12,11 +12,10 @@ def main():
         print("\n===== Main Menu =====")
         print("1. Manage Contacts")
         print("2. Manage Notes")
-        print("3. Check Days Until Next Birthday")
-        print("4. Exit Program")
+        print("3. Exit Program")
 
         try:
-            choice = int(input("Choose option (1/2/3/4): "))
+            choice = int(input("Choose option (1/2/3): "))
         except ValueError:
             print("Error! Enter a number.")
             continue
@@ -26,8 +25,6 @@ def main():
         elif choice == 2:
             notes_menu(notes_book_manager)
         elif choice == 3:
-            check_birthday_menu(contact_book_manager)
-        elif choice == 4:
             print("Closing the program. Goodbye!")
             break
         else:
@@ -290,18 +287,7 @@ def notes_menu(notes_book_manager):
             break
         else:
             print("Invalid choice. Choose an option from 1 to 6.")
-def check_birthday_menu(contact_book_manager):
-     upcoming_birthdays = contact_book_manager.get_days_to_birthday()
 
-     print("\n======== Check Days Until Next Birthday ========")
-     if not upcoming_birthdays:
-         print("No upcoming birthdays found.")
-     else:
-         for birthday_info in upcoming_birthdays:
-             name = birthday_info['name']
-             surname = birthday_info['surname']
-             days_to_birthday = birthday_info['days_to_birthday']
-             print(f"{name} {surname}'s birthday is in {days_to_birthday} days.")
 
 if __name__ == '__main__':
     main()
