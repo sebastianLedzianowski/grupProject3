@@ -19,7 +19,7 @@ def faker_notes_book():
             'content': fake.paragraph()
         }
         print(dictionary_record)
-        notes_manager.create(user_data=dictionary_record)
+        # notes_manager.create(user_data=dictionary_record)
 
 def faker_contacts_book():
     contacts_manager = ContactBookManager()
@@ -31,7 +31,7 @@ def faker_contacts_book():
             'email': fake.email(),
             'birthday': fake.date_of_birth(minimum_age=18, maximum_age=50).strftime('%Y-%m-%d'),
         }
-        #print(dictionary_record)
+        print(dictionary_record)
         # contacts_manager.create(user_data=dictionary_record)
 
 if __name__ == '__main__':
