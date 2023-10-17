@@ -29,7 +29,8 @@ A contact and notes management system integrated with MongoDB.
 
 ## 🛠️Configuration
 
-### **Environment Variables**: Set up your `.env` file in the root directory with the following variables:
+### **Environment Variables**:
+Set up your `.env` file in the root directory with the following variables:
 ```bash
 # Mongodb settings
 DB_PORT=
