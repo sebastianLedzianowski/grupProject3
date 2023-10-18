@@ -1,13 +1,11 @@
 from src.mongodb.db_connection import DatabaseConnectionManager
 from src.mongodb.db_repository import DataRepository
 from src.mongodb.models import AddressBook
-days_to_birthday
 from datetime import datetime, timedelta, date
 from dotenv import load_dotenv
 import requests
 import os
 
- main
 
 class ContactBookManager:
     def __init__(self):
@@ -54,7 +52,6 @@ class ContactBookManager:
             print(f"An error occurred: {str(e)}")
             return []
 
-days_to_birthday
     def get_days_to_birthday(self):
         today = date.today()
         today_to_30 = today + timedelta(days=30)
@@ -79,9 +76,6 @@ days_to_birthday
                                            })
         return upcoming_birthdays
 
-
-
-
     @staticmethod
     def get_birthday_wish(name):
         url = os.getenv("BIRTHDAY_URL")
@@ -89,4 +83,3 @@ days_to_birthday
         headers = {"Content-Type": "application/json"}
         response = requests.post(url, json=data, headers=headers)
         return response
- main

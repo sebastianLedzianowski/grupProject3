@@ -281,7 +281,6 @@ def notes_menu(notes_book_manager):
             else:
                 print("Invalid choice. Choose an option from 1 to 4.")
 
-
         elif notes_choice == 6:
             print("Back to Main Menu.")
             break

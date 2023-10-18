@@ -2,6 +2,7 @@ from dataclasses import asdict
 from src.mongodb.models import AddressBook
 from src.utils.data_decorators import *
 
+
 class ContactBookCollector:
     @staticmethod
     @validate_input("Enter name: ")

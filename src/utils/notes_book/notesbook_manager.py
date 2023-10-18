@@ -30,7 +30,6 @@ class NotesBookManager:
             print(f"An error occurred: {str(e)}")
             return []
 
-         main_interface
         sorted_notes = sorted(notes, key=lambda x: x.get(sort_key, ''))
 
         return sorted_notes
