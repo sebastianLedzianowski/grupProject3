@@ -5,12 +5,12 @@ from src.utils.notes_book.notesbook_manager import NotesBookManager
 from src.utils.data_decorators import *
 from tests.read_all_notes_book import read_all_notes_book
 
-def test_delete(key, value):
-    NotesBookManager().delete(key,value)
+def test_edit(key, value, new_value):
+    NotesBookManager().edit(key,value,new_value)
 
 
 if __name__ == '__main__':
     read_all_notes_book()
-    test_delete("title", "")
+    test_edit("title", "Fancy title", "Just title")
     read_all_notes_book()
     
