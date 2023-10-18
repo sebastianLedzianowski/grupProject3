@@ -60,7 +60,6 @@ class ContactBookManager:
         for contact in contacts:
             birthday = datetime.strptime(contact["birthday"], "%Y-%m-%d")
             upcoming_birthday = date(today.year, birthday.month, birthday.day)
-            age = today.year - birthday.year - ((today.month, today.day) < (birthday.month, birthday.day))
             days_to_birthdays = (upcoming_birthday - today).days
             if today.day == birthday.day and today.month == birthday.month:
                 upcoming_birthdays.append({"name": contact["name"],
@@ -68,7 +67,7 @@ class ContactBookManager:
                                            "birthday": contact["birthday"],
                                            "days_to_birthday": days_to_birthdays
                                            })
-            if today <= upcoming_birthday <= today_to_30:
+            if today < upcoming_birthday <= today_to_30:
                 upcoming_birthdays.append({"name": contact["name"],
                                            "surname": contact["surname"],
                                            "birthday": contact["birthday"],
