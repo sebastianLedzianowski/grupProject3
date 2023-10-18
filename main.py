@@ -82,7 +82,7 @@ def contact_menu(contact_book_manager):
                 continue
 
             if edit_choice in range(1, 6):
-                fields = ["Name", "Surname", "Phone number", "Email", "Birthday"]
+                fields = ["name", "surname", "phone number", "email", "birthday"]
                 field = fields[edit_choice - 1]
                 value = input(f"Enter the current value of the {field}: ")
                 updates = input(f"Enter the new value for the {field}: ")
@@ -107,7 +107,7 @@ def contact_menu(contact_book_manager):
                     continue
 
                 if delete_choice in range(1, 6):
-                    fields = ["Name", "Surname", "Phone number", "Email", "Birthday"]
+                    fields = ["name", "surname", "phone number", "email", "birthday"]
                     field = fields[delete_choice - 1]
                     value = input(f"Enter the value of the {field} to delete: ")
                     contact_book_manager.delete(field, value)
@@ -131,7 +131,7 @@ def contact_menu(contact_book_manager):
                     continue
 
                 if sort_choice in range(1, 6):
-                    fields = ["Name", "Surname", "Phone number", "Email", "Birthday"]
+                    fields = ["name", "surname", "phone number", "email", "birthday"]
                     sort_key = fields[sort_choice - 1]
                     sorted_contacts = contact_book_manager.get_sorted_contacts(sort_key)
                     if not sorted_contacts:
@@ -211,7 +211,7 @@ def notes_menu(notes_book_manager):
                 continue
 
             if edit_choice in range(1, 4):
-                fields = ["Title", "Tag", "Content"]
+                fields = ["title", "tag", "content"]
                 field = fields[edit_choice - 1]
                 value = input(f"Enter the current value of the {field}: ")
                 updates = input(f"Enter the new value for the {field}: ")
@@ -234,7 +234,7 @@ def notes_menu(notes_book_manager):
                     continue
 
                 if delete_choice in range(1, 4):
-                    fields = ["Title", "Tag", "Content"]
+                    fields = ["title", "tag", "content"]
                     field = fields[delete_choice - 1]
                     value = input(f"Enter the value of the {field} to delete: ")
                     notes_book_manager.delete(field, value)
@@ -256,7 +256,7 @@ def notes_menu(notes_book_manager):
                 continue
 
             if sort_choice in range(1, 4):
-                fields = ["Title", "Tag", "Content"]
+                fields = ["title", "tag", "content"]
                 sort_key = fields[sort_choice - 1]
                 sorted_notes = notes_book_manager.sorted(sort_key)
                 if not sorted_notes:
