@@ -86,7 +86,7 @@ def contact_menu(contact_book_manager):
                 field = fields[edit_choice - 1]
                 value = input(f"Enter the current value of the {field}: ")
                 updates = input(f"Enter the new value for the {field}: ")
-                contact_book_manager.edit(field, value, updates)
+                contact_book_manager.edit(field, value, {field: updates})
             elif edit_choice == 6:
                 print("Back to Manage Contacts.")
             else:
@@ -131,7 +131,7 @@ def contact_menu(contact_book_manager):
                     continue
 
                 if sort_choice in range(1, 6):
-                    fields = ["Name", "Surname", "Phone number", "Email", "Birthday"]
+                    fields = ["name", "surname", "phone number", "email", "birthday"]
                     sort_key = fields[sort_choice - 1]
                     sorted_contacts = contact_book_manager.get_sorted_contacts(sort_key)
                     if not sorted_contacts:
@@ -215,7 +215,7 @@ def notes_menu(notes_book_manager):
                 field = fields[edit_choice - 1]
                 value = input(f"Enter the current value of the {field}: ")
                 updates = input(f"Enter the new value for the {field}: ")
-                notes_book_manager.edit(field, value, updates)
+                notes_book_manager.edit(field, value, {field: updates})
             elif edit_choice == 4:
                 print("Back to Manage Notes.")
             else:
@@ -256,7 +256,7 @@ def notes_menu(notes_book_manager):
                 continue
 
             if sort_choice in range(1, 4):
-                fields = ["Title", "Tag", "Content"]
+                fields = ["title", "tag", "content"]
                 sort_key = fields[sort_choice - 1]
                 sorted_notes = notes_book_manager.sorted(sort_key)
                 if not sorted_notes:

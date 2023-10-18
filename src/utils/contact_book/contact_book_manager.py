@@ -25,7 +25,7 @@ class ContactBookManager:
 
     def edit(self, field, value, updates):
         try:
-            self.data_repo.update(value_type=AddressBook, field=field, value=value, updates={"$set": {field: updates}})
+            self.data_repo.update(value_type=AddressBook, field=field, value=value, updates=updates)
         except Exception as e:
             print(f"An error occurred: {str(e)}")
 

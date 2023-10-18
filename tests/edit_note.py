@@ -8,9 +8,9 @@ from tests.read_all_notes_book import read_all_notes_book
 def test_edit(key, value, new_value):
     NotesBookManager().edit(key,value,new_value)
 
-
 if __name__ == '__main__':
     read_all_notes_book()
-    test_edit("title", "Fancy title", "Just title")
+    #(key, current title, key: new title)
+    test_edit("title", "Fancy title", {'title': 'Just title'})
     read_all_notes_book()
     

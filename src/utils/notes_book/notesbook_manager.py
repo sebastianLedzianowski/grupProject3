@@ -36,7 +36,7 @@ class NotesBookManager:
 
     def edit(self, field, value, updates):
         try:
-            self.data_repo.update(value_type=NoteBook, field=field, value=value, updates={"$set": updates})
+            self.data_repo.update(value_type=NoteBook, field=field, value=value, updates=updates)
         except Exception as e:
             print(f"An error occurred: {str(e)}")
     
@@ -45,3 +45,22 @@ class NotesBookManager:
             self.data_repo.delete(value_type=NoteBook, field=field, value=value)
         except Exception as e:
             print(f"An error occurred: {str(e)}")    
+
+    def look_for_doubles(self, field, value):
+        try:
+            notes = self.data_repo.read_all(NoteBook)
+            duplicates = []
+            seen_values = set()
+            
+            for note in notes:
+                if getattr(note, field) == value:
+                    # Sprawdź, czy wartość jest już widziana
+                    if value in seen_values:
+                        duplicates.append(note.to_dict())  # Dodaj duplikat do listy
+                    else:
+                        seen_values.add(value)  # Dodaj wartość do zbioru widzianych wartości
+            
+            return duplicates
+    
+        except Exception as e:
+            print(f"An error occurred: {str(e)}")
