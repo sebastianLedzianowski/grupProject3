@@ -8,7 +8,6 @@ from email.message import EmailMessage
 import ssl
 from dotenv import load_dotenv
 
-
 def main():
     contact_book_manager = ContactBookManager()
     notes_book_manager = NotesBookManager()
