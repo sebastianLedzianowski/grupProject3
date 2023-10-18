@@ -1,13 +1,11 @@
 from src.mongodb.db_connection import DatabaseConnectionManager
 from src.mongodb.db_repository import DataRepository
 from src.mongodb.models import AddressBook
-days_to_birthday
 from datetime import datetime, timedelta, date
 from dotenv import load_dotenv
 import requests
 import os
 
- main
 
 class ContactBookManager:
     def __init__(self):
@@ -27,7 +25,7 @@ class ContactBookManager:
 
     def edit(self, field, value, updates):
         try:
-            self.data_repo.update(value_type=AddressBook, field=field, value=value, updates={"$set": {field: updates}})
+            self.data_repo.update(value_type=AddressBook, field=field, value=value, updates=updates)
         except Exception as e:
             print(f"An error occurred: {str(e)}")
 
@@ -53,8 +51,21 @@ class ContactBookManager:
         except Exception as e:
             print(f"An error occurred: {str(e)}")
             return []
+        
+    def look_for_doubles(self, field, value):
+        try:
+            notes = self.data_repo.read_all(AddressBook)
+            duplicates = []
 
-days_to_birthday
+            for note_dict in notes:
+                if note_dict.get(field) == value:
+                    duplicates.append(note_dict)
+            
+            return duplicates
+            
+        except Exception as e:
+            print(f"An error occurred: {str(e)}")
+
     def get_days_to_birthday(self):
         today = date.today()
         today_to_30 = today + timedelta(days=30)
@@ -63,7 +74,6 @@ days_to_birthday
         for contact in contacts:
             birthday = datetime.strptime(contact["birthday"], "%Y-%m-%d")
             upcoming_birthday = date(today.year, birthday.month, birthday.day)
-            age = today.year - birthday.year - ((today.month, today.day) < (birthday.month, birthday.day))
             days_to_birthdays = (upcoming_birthday - today).days
             if today.day == birthday.day and today.month == birthday.month:
                 upcoming_birthdays.append({"name": contact["name"],
@@ -71,16 +81,13 @@ days_to_birthday
                                            "birthday": contact["birthday"],
                                            "days_to_birthday": days_to_birthdays
                                            })
-            if today <= upcoming_birthday <= today_to_30:
+            if today < upcoming_birthday <= today_to_30:
                 upcoming_birthdays.append({"name": contact["name"],
                                            "surname": contact["surname"],
                                            "birthday": contact["birthday"],
                                            "days_to_birthday": days_to_birthdays
                                            })
         return upcoming_birthdays
-
-
-
 
     @staticmethod
     def get_birthday_wish(name):
@@ -89,4 +96,3 @@ days_to_birthday
         headers = {"Content-Type": "application/json"}
         response = requests.post(url, json=data, headers=headers)
         return response
- main

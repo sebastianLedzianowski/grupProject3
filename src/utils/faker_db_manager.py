@@ -34,6 +34,7 @@ def faker_contacts_book():
         print(dictionary_record)
         # contacts_manager.create(user_data=dictionary_record)
 
+
 if __name__ == '__main__':
     faker_notes_book()
     print()

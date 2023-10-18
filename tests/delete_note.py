@@ -3,18 +3,14 @@ from src.utils.contact_book.contact_book_manager import ContactBookManager
 from src.utils.notes_book.notesbook_collector import NotesBookCollector
 from src.utils.notes_book.notesbook_manager import NotesBookManager
 from src.utils.data_decorators import *
+from tests.read_all_notes_book import read_all_notes_book
 
-# @validate_phone_number
-def test_add_contact():
-    user_data = ContactBookCollector().get_user_input()
-    ContactBookManager().create(user_data=user_data)
-
-def test_add_note():
-    user_data = NotesBookCollector().get_user_input()
-    NotesBookManager().create(user_data=user_data)
+def test_delete(key, value):
+    NotesBookManager().delete(key,value)
 
 
 if __name__ == '__main__':
-    #test_add_contact()
-    test_add_note()
-    pass
+    read_all_notes_book()
+    test_delete("title", "")
+    read_all_notes_book()
+    
