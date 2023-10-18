@@ -86,7 +86,7 @@ def contact_menu(contact_book_manager):
                 field = fields[edit_choice - 1]
                 value = input(f"Enter the current value of the {field}: ")
                 updates = input(f"Enter the new value for the {field}: ")
-                contact_book_manager.edit(field, value, updates)
+                contact_book_manager.edit(field, value, {field: updates})
             elif edit_choice == 6:
                 print("Back to Manage Contacts.")
             else:
@@ -215,7 +215,7 @@ def notes_menu(notes_book_manager):
                 field = fields[edit_choice - 1]
                 value = input(f"Enter the current value of the {field}: ")
                 updates = input(f"Enter the new value for the {field}: ")
-                notes_book_manager.edit(field, value, updates)
+                notes_book_manager.edit(field, value, {field: updates})
             elif edit_choice == 4:
                 print("Back to Manage Notes.")
             else:
