@@ -1,5 +1,3 @@
-import json
-
 from src.utils.contact_book.contact_book_manager import ContactBookManager
 from src.utils.notes_book.notesbook_manager import NotesBookManager
 from src.utils.contact_book.contact_book_collector import ContactBookCollector
@@ -96,7 +94,6 @@ def contact_menu(contact_book_manager):
             else:
                 print("Invalid choice. Choose an option from 1 to 6.")
         elif contact_choice == 4:
- main_interface
             print("\n===== Delete Contact =====")
             print("1. Delete by Name")
             print("2. Delete by Surname")
@@ -137,67 +134,6 @@ def contact_menu(contact_book_manager):
                 sorted_contacts = contact_book_manager.get_sorted_contacts(sort_key)
                 if not sorted_contacts:
                     print("No contacts found.")
-                    
-                    
-                print("\n===== Delete Contact =====")
-                print("1. Delete by Name")
-                print("2. Delete by Surname")
-                print("3. Delete by Phone number")
-                print("4. Delete by Email")
-                print("5. Delete by Birthday")
-                print("6. Back to Manage Contacts")
-
-                try:
-                    delete_choice = int(input("Choose delete option (1/2/3/4/5/6): "))
-                except ValueError:
-                    print("Error! Enter a number.")
-                    continue
-
-                if delete_choice in range(1, 6):
-                    fields = ["name", "surname", "phone number", "email", "birthday"]
-                    field = fields[delete_choice - 1]
-                    value = input(f"Enter the value of the {field} to delete: ")
-                    contact_book_manager.delete(field, value)
-                elif delete_choice == 6:
-                    print("Back to Manage Contacts.")
-                else:
-                    print("Invalid choice. Choose an option from 1 to 6.")
-        elif contact_choice == 5:
-                print("\n===== Sort Contacts =====")
-                print("1. Sort by Name")
-                print("2. Sort by Surname")
-                print("3. Sort by Phone number")
-                print("4. Sort by Email")
-                print("5. Sort by Birthday")
-                print("6. Back to Manage Contacts")
-
-                try:
-                    sort_choice = int(input("Choose sort option (1/2/3/4/5/6): "))
-                except ValueError:
-                    print("Error! Enter a number.")
-                    continue
-
-                if sort_choice in range(1, 6):
-                    fields = ["name", "surname", "phone number", "email", "birthday"]
-                    sort_key = fields[sort_choice - 1]
-                    sorted_contacts = contact_book_manager.get_sorted_contacts(sort_key)
-                    if not sorted_contacts:
-                        print("No contacts found.")
-                    else:
-                        template = "| {:^17} | {:^17} | {:^17} | {:^30} | {:^15} |"
-                        header = f" Sorted Contacts by {sort_key} "
-                        print("\n{:-^90}".format(header.center(90)))
-                        print(template.format("Name", "Surname", "Phone number", "Email", "Birthday"))
-                        for contact in sorted_contacts:
-                            formatted_template = template.format(
-                                contact["name"], contact["surname"], contact["phone_number"], contact["email"],
-                                contact["birthday"]
-                            )
-                            print("-" * len(formatted_template))
-                            print(formatted_template)
-                elif sort_choice == 6:
-
-                  main
                 else:
                     template = "| {:^17} | {:^17} | {:^17} | {:^30} | {:^15} |"
                     header = f" Sorted Contacts by {sort_key} "
@@ -282,7 +218,6 @@ def notes_menu(notes_book_manager):
             else:
                 print("Invalid choice. Choose an option from 1 to 4.")
         elif notes_choice == 4:
- main_interface
             print("\n===== Delete Note =====")
             print("1. Delete by Title")
             print("2. Delete by Tag")
@@ -302,29 +237,6 @@ def notes_menu(notes_book_manager):
                 print("Back to Manage Notes.")
             else:
                 print("Invalid choice. Choose an option from 1 to 4.")
-
-                print("\n===== Delete Note =====")
-                print("1. Delete by Title")
-                print("2. Delete by Tag")
-                print("3. Delete by Content")
-                print("4. Back to Manage Notes")
-
-                try:
-                    delete_choice = int(input("Choose delete option (1/2/3/4): "))
-                except ValueError:
-                    print("Error! Enter a number.")
-                    continue
-
-                if delete_choice in range(1, 4):
-                    fields = ["title", "tag", "content"]
-                    field = fields[delete_choice - 1]
-                    value = input(f"Enter the value of the {field} to delete: ")
-                    notes_book_manager.delete(field, value)
-                elif delete_choice == 4:
-                    print("Back to Manage Notes.")
-                else:
-                    print("Invalid choice. Choose an option from 1 to 4.")
- main
         elif notes_choice == 5:
             print("\n===== Sort Notes =====")
             print("1. Sort by Title")
@@ -365,10 +277,6 @@ def notes_menu(notes_book_manager):
                 print("Back to Manage Notes.")
             else:
                 print("Invalid choice. Choose an option from 1 to 4.")
- main_interface
-
-
- main
         elif notes_choice == 6:
             print("Back to Main Menu.")
             break
@@ -386,20 +294,8 @@ def check_birthday_menu(contact_book_manager):
             print(
                 f"{birthday_info['name']} {birthday_info['surname']}'s birthday is in {birthday_info['days_to_birthday']} days.")
             if birthday_info['days_to_birthday'] == 0:
-                generate_and_handle_birthday_wish(contact_book_manager, birthday_info)
-
-
-def check_birthday_menu(contact_book_manager):
-    upcoming_birthdays = contact_book_manager.get_days_to_birthday()
-    print("\n======== Check Days Until Next Birthday ========")
-    if not upcoming_birthdays:
-        print("No upcoming birthdays found.")
-    else:
-        for birthday_info in upcoming_birthdays:
-            print(
-                f"{birthday_info['name']} {birthday_info['surname']}'s birthday is in {birthday_info['days_to_birthday']} days.")
-            if birthday_info['days_to_birthday'] == 0:
                 generate_birthday_wish(contact_book_manager, birthday_info)
+
 
 def generate_birthday_wish(contact_book_manager, name):
     print("Would you like to generate birthday wishes?")
@@ -425,6 +321,7 @@ def generate_birthday_wish(contact_book_manager, name):
     else:
         print("Invalid choice. Birthday wishes not generated.")
 
+
 def handle_send_email(name):
     print("Do you want to send an email with birthday wishes?")
     print("1. Yes")
@@ -439,6 +336,8 @@ def handle_send_email(name):
         send_email(name, "Birthday Wishes", content)
     else:
         print("Email not sent.")
+
+
 def send_email(email, title, content):
     load_dotenv()
     name = os.getenv("EMAIL_USER")
@@ -460,6 +359,7 @@ def send_email(email, title, content):
         print('Email sent successfully!')
     except Exception as e:
         print(f'Failed to send email. Error: {e}')
+
 
 if __name__ == '__main__':
     main()
