@@ -1,3 +1,5 @@
+import json
+
 from src.utils.contact_book.contact_book_manager import ContactBookManager
 from src.utils.notes_book.notesbook_manager import NotesBookManager
 from src.utils.contact_book.contact_book_collector import ContactBookCollector
