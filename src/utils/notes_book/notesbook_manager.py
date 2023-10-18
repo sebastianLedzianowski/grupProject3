@@ -50,17 +50,12 @@ class NotesBookManager:
         try:
             notes = self.data_repo.read_all(NoteBook)
             duplicates = []
-            seen_values = set()
-            
-            for note in notes:
-                if getattr(note, field) == value:
-                    # Sprawdź, czy wartość jest już widziana
-                    if value in seen_values:
-                        duplicates.append(note.to_dict())  # Dodaj duplikat do listy
-                    else:
-                        seen_values.add(value)  # Dodaj wartość do zbioru widzianych wartości
+
+            for note_dict in notes:
+                if note_dict.get(field) == value:
+                    duplicates.append(note_dict)
             
             return duplicates
-    
+            
         except Exception as e:
             print(f"An error occurred: {str(e)}")

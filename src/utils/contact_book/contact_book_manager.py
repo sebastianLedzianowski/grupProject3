@@ -51,6 +51,20 @@ class ContactBookManager:
         except Exception as e:
             print(f"An error occurred: {str(e)}")
             return []
+        
+    def look_for_doubles(self, field, value):
+        try:
+            notes = self.data_repo.read_all(AddressBook)
+            duplicates = []
+
+            for note_dict in notes:
+                if note_dict.get(field) == value:
+                    duplicates.append(note_dict)
+            
+            return duplicates
+            
+        except Exception as e:
+            print(f"An error occurred: {str(e)}")
 
     def get_days_to_birthday(self):
         today = date.today()
