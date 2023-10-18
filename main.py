@@ -131,7 +131,7 @@ def contact_menu(contact_book_manager):
                     continue
 
                 if sort_choice in range(1, 6):
-                    fields = ["Name", "Surname", "Phone number", "Email", "Birthday"]
+                    fields = ["name", "surname", "phone number", "email", "birthday"]
                     sort_key = fields[sort_choice - 1]
                     sorted_contacts = contact_book_manager.get_sorted_contacts(sort_key)
                     if not sorted_contacts:
@@ -256,7 +256,7 @@ def notes_menu(notes_book_manager):
                 continue
 
             if sort_choice in range(1, 4):
-                fields = ["Title", "Tag", "Content"]
+                fields = ["title", "tag", "content"]
                 sort_key = fields[sort_choice - 1]
                 sorted_notes = notes_book_manager.sorted(sort_key)
                 if not sorted_notes:
