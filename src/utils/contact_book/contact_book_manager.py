@@ -79,13 +79,14 @@ class ContactBookManager:
         contacts = self.data_repo.read_all(AddressBook)
         upcoming_birthdays = []
         for contact in contacts:
-            birthday = datetime.strptime(contact["birthday"], "%Y-%m-%d")
+            birthday = datetime.strptime(contact['birthday'], "%Y-%m-%d")
             upcoming_birthday = date(today.year, birthday.month, birthday.day)
             days_to_birthdays = (upcoming_birthday - today).days
             if today.day == birthday.day and today.month == birthday.month:
-                upcoming_birthdays.append({"name": contact["name"],
-                                           "surname": contact["surname"],
-                                           "birthday": contact["birthday"],
+                upcoming_birthdays.append({"name": contact['name'],
+                                           "surname": contact['surname'],
+                                           "birthday": contact['birthday'],
+                                           "email": contact['email'],
                                            "days_to_birthday": days_to_birthdays
                                            })
             if today < upcoming_birthday <= today_to_30:

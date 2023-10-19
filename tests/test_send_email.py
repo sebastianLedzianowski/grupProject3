@@ -4,7 +4,7 @@ def test_send_email():
     email = 'including@o2.pl'
     title = 'Temat test'
     content = """
-    tresc testowa
+    tresc testowa\nDlaczego\ntak sie \ndzieje
     """
     send_email(email, title, content)
 

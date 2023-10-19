@@ -2,11 +2,14 @@ from src.utils.contact_book.contact_book_manager import ContactBookManager
 from src.utils.notes_book.notesbook_manager import NotesBookManager
 from src.utils.contact_book.contact_book_collector import ContactBookCollector
 from src.utils.notes_book.notesbook_collector import NotesBookCollector
-import os
-import smtplib
-from email.message import EmailMessage
-import ssl
-from dotenv import load_dotenv
+# import os
+# import smtplib
+# from email.message import EmailMessage
+# import ssl
+# from dotenv import load_dotenv
+
+from src.utils.send_email import send_email
+
 
 def main():
     contact_book_manager = ContactBookManager()
@@ -305,81 +308,52 @@ def notes_menu(notes_book_manager):
 
 
 def check_birthday_menu(contact_book_manager):
-    upcoming_birthdays = contact_book_manager.get_days_to_birthday()
-    print("\n======== Check Days Until Next Birthday ========")
-    if not upcoming_birthdays:
-        print("No upcoming birthdays found.")
-    else:
-        for birthday_info in upcoming_birthdays:
-            print(
-                f"{birthday_info['name']} {birthday_info['surname']}'s birthday is in "
-                f"{birthday_info['days_to_birthday']} days.")
-            if birthday_info['days_to_birthday'] == 0:
-                generate_birthday_wish(contact_book_manager, birthday_info)
-
-
-def generate_birthday_wish(contact_book_manager, name):
-    print("Would you like to generate birthday wishes?")
-    print("1. Yes")
-    print("2. No")
-    try:
-        user_choice = int(input("Choose option (1/2): "))
-    except ValueError:
-        print("Invalid input. Please enter a number.")
-        return
-
-    if user_choice == 1:
-        response = contact_book_manager.get_birthday_wish(name)
-        if response and response.status_code == 200:
-            print("Birthday wishes generated successfully:")
-            print(response.text)
+    while True:
+        upcoming_birthdays = contact_book_manager.get_days_to_birthday()
+        print("\n======== Check Days Until Next Birthday ========")
+        if not upcoming_birthdays:
+            print("No upcoming birthdays found.")
         else:
-            print("Error generating birthday wishes.")
-        handle_send_email(name)
-    elif user_choice == 2:
-        print("Birthday wishes not generated.")
-        return
-    else:
-        print("Invalid choice. Birthday wishes not generated.")
+            for birthday_info in upcoming_birthdays:
+                print(
+                    f"{birthday_info['name']} {birthday_info['surname']}'s birthday is in "
+                    f"{birthday_info['days_to_birthday']} days.")
+                if birthday_info['days_to_birthday'] == 0:
+                    email = birthday_info['email']
+                    generate_birthday_wish(contact_book_manager, birthday_info, email)
 
 
-def handle_send_email(name):
-    print("Do you want to send an email with birthday wishes?")
-    print("1. Yes")
-    print("2. No")
-    try:
+def generate_birthday_wish(contact_book_manager, name, email):
+    while True:
+        print(f"Would you like to generate birthday wishes {name['name']}?")
+        print("1. Yes")
+        print("2. No")
         user_choice = int(input("Choose option (1/2): "))
-    except ValueError:
-        print("Invalid input. Please enter a number.")
-        return
-    if user_choice == 1:
-        content = "Happy Birthday, {}!".format(name)
-        send_email(name, "Birthday Wishes", content)
-    else:
-        print("Email not sent.")
+        if user_choice == 1:
+            response = contact_book_manager.get_birthday_wish(name)
+            if response and response.status_code == 200:
+                wish = response.json()['wish']
+                print("Birthday wishes generated successfully:")
+                print(f'{wish}')
+                return handle_send_email(name, email, wish)
+            else:
+                print("Error generating birthday wishes.")
+        elif user_choice == 2:
+            print("Birthday wishes not generated.")
+            return main()
+        else:
+            print("Invalid choice. Birthday wishes not generated.")
 
 
-def send_email(email, title, content):
-    load_dotenv()
-    name = os.getenv("EMAIL_USER")
-    password = os.getenv("EMAIL_PASSWD")
-    address = 'smtp.gmail.com'
-    port = 465
-    context = ssl.create_default_context()
-
-    em = EmailMessage()
-    em['From'] = name
-    em['To'] = email
-    em['Subject'] = title
-    em.set_content(content)
-
-    try:
-        with smtplib.SMTP_SSL(address, port, context=context) as smtp:
-            smtp.login(name, password)
-            smtp.sendmail(name, email, em.as_string())
-        print('Email sent successfully!')
-    except Exception as e:
-        print(f'Failed to send email. Error: {e}')
+def handle_send_email(name, email, wish):
+    while True:
+        print(f"\nDo you want to send an email with birthday wishes {name['name']}?")
+        print("1. Yes")
+        print("2. No")
+        user_choice = int(input("Choose option (1/2):\n "))
+        if user_choice == 1:
+            return send_email(email, "Birthday Wishes", wish)
+        print("Invalid input. Please enter a number.\n")
 
 
 if __name__ == '__main__':
