@@ -98,7 +98,6 @@ class ContactBookManager:
         sorted_upcoming_birthdays = sorted(upcoming_birthdays, key=lambda x: -x["days_to_birthday"])
 
         return sorted_upcoming_birthdays
-
     @staticmethod
     def get_birthday_wish(name):
         url = os.getenv("BIRTHDAY_URL")
