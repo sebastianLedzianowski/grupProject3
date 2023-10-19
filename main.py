@@ -60,11 +60,11 @@ def contact_menu(contact_book_manager):
                 max_phone_number_length = max(len(contact.get('phone_number', '')) for contact in contacts)
                 max_email_length = max(len(contact.get('email', '')) for contact in contacts)
                 max_birthday_length = max(len(contact.get('birthday', '')) for contact in contacts)
-                print("| {:^{}} | {:^{}} | {:^{}} | {:^{}} | {:^{}} |".format('Name', max_name_length, 'Surname',
-                                                                              max_surname_length, 'Phone number',
-                                                                              max_phone_number_length, 'Email',
-                                                                              max_email_length, 'Birthday',
-                                                                              max_birthday_length))
+                print("\n| {:^{}} | {:^{}} | {:^{}} | {:^{}} | {:^{}} |".format('Name', max_name_length, 'Surname',
+                                                                                max_surname_length, 'Phone number',
+                                                                                max_phone_number_length, 'Email',
+                                                                                max_email_length, 'Birthday',
+                                                                                max_birthday_length))
                 separator_line = "|{}+{}+{}+{}+{}|".format("-" * (max_name_length + 2), "-" * (max_surname_length + 2),
                                                            "-" * (max_phone_number_length + 2), "-" * (max_email_length
                                                                                                        + 2),
@@ -207,25 +207,19 @@ def notes_menu(notes_book_manager):
             continue
         if notes_choice == 1:
             notes = notes_book_manager.read_all()
+            note_number = 1
             if not notes:
                 print("No notes found.")
             else:
-                max_title_length = max(len(note.get("title", "")) for note in notes)
-                max_content_length = max(len(note.get("content", "")) for note in notes)
-                max_tags_length = max(len(", ".join(note.get("tag", []))) for note in notes)
-                print("| {:^{}} | {:^{}} | {:^{}} |".format("Title", max_title_length, "Content", max_content_length,
-                                                            "Tags", max_tags_length))
-                separator_line = "+{}+{}+{}+".format("-" * (max_title_length + 2), "-" * (max_content_length + 2),
-                                                     "-" * (max_tags_length + 2))
-                print(separator_line)
                 for note in notes:
-                    title = note.get("title", "")[:max_title_length]
-                    content = note.get("content", "")[:max_content_length]
-                    tags = ", ".join(note.get("tag", []))[:max_tags_length]
-                    print("| {:<{}} | {:<{}} | {:<{}} |".format(title, max_title_length, content, max_content_length,
-                                                                tags, max_tags_length))
-
-                    print(separator_line)
+                    title = note.get("title", "")
+                    tags = ", ".join(note.get("tag", []))
+                    content = note.get("content", "")
+                    print(f'\nNote Number: {note_number}')
+                    print(f'Title: {title}')
+                    print(f'Tags: {tags}')
+                    print(f'Content: {content}')
+                    note_number += 1
         elif notes_choice == 2:
             user_data = NotesBookCollector.get_user_input()
             notes_book_manager.create(user_data)
@@ -286,27 +280,19 @@ def notes_menu(notes_book_manager):
                 fields = ["title", "tag", "content"]
                 sort_key = fields[sort_choice - 1]
                 sorted_notes = notes_book_manager.sorted(sort_key)
+                note_number = 1
                 if not sorted_notes:
                     print("No notes found.")
                 else:
-                    max_title_length = max(len(note.get("title", "")) for note in sorted_notes)
-                    max_content_length = max(len(note.get("content", "")) for note in sorted_notes)
-                    max_tags_length = max(len(", ".join(note.get("tag", []))) for note in sorted_notes)
-                    print(
-                        "| {:^{}} | {:^{}} | {:^{}} |".format("Title", max_title_length, "Content", max_content_length,
-                                                              "Tags", max_tags_length))
-                    separator_line = "+{}+{}+{}+".format("-" * (max_title_length + 2), "-" * (max_content_length + 2),
-                                                         "-" * (max_tags_length + 2))
-                    print(separator_line)
                     for note in sorted_notes:
-                        title = note.get("title", "")[:max_title_length]
-                        content = note.get("content", "")[:max_content_length]
-                        tags = ", ".join(note.get("tag", []))[:max_tags_length]
-                        print(
-                            "| {:<{}} | {:<{}} | {:<{}} |".format(title, max_title_length, content, max_content_length,
-                                                                  tags, max_tags_length))
-
-                        print(separator_line)
+                        title = note.get("title", "")
+                        tags = ", ".join(note.get("tag", []))
+                        content = note.get("content", "")
+                        print(f'\nNote Number: {note_number}')
+                        print(f'Title: {title}')
+                        print(f'Tags: {tags}')
+                        print(f'Content: {content}')
+                        note_number += 1
             elif sort_choice == 4:
                 print("Back to Manage Notes.")
             else:
