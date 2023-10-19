@@ -35,10 +35,11 @@ def test_create_contact(contact_manager):
         'email': 'create.test@example.com',
         'birthday': '1991-05-15'
     }
+
     try:
         manager.create(user_data)
         contacts = manager.read_all()
-        assert len(contacts) is not 0
+        assert len(contacts) != 0
         names = [contact['name'] for contact in contacts]
         assert user_data['name'] in names
 
@@ -63,7 +64,6 @@ def test_read_all(contact_manager):
     try:
         # Fetch all contacts
         contacts = manager.read_all()
-
         # Check if the newly created contact exists in the fetched contacts
         names = [contact['name'] for contact in contacts]
         assert user_data['name'] in names
@@ -120,7 +120,7 @@ def test_get_sorted_contacts(contact_manager):
     manager.create(user_data1)
 
     user_data2 = {
-        'name': 'Aaaalpha',
+        'name': '',
         'surname': 'Alphor',
         'phone_number': '123456789',
         'email': 'alpha.alphor@example.com',
