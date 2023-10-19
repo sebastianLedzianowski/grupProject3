@@ -13,5 +13,5 @@ def sort_notes_book(sort_key):
 if __name__ == '__main__':
     #sort_notes_book('title')
     #sort_notes_book('tag')
-    #sort_notes_book('content')
+    sort_notes_book('content')
     pass
