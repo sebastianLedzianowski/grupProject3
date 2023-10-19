@@ -95,7 +95,8 @@ class ContactBookManager:
                                            "birthday": contact["birthday"],
                                            "days_to_birthday": days_to_birthdays
                                            })
-        return upcoming_birthdays
+        sorted_upcoming_birthdays = sorted(upcoming_birthdays, key=lambda x: -x["days_to_birthday"])
+        return sorted_upcoming_birthdays
 
     @staticmethod
     def get_birthday_wish(name):

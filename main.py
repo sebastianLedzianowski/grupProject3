@@ -468,6 +468,7 @@ def check_birthday_menu(contact_book_manager):
                 print(
                     f"{birthday_info['name']} {birthday_info['surname']}'s birthday is in "
                     f"{birthday_info['days_to_birthday']} days.")
+            for birthday_info in upcoming_birthdays:
                 if birthday_info['days_to_birthday'] == 0:
                     email = birthday_info['email']
                     generate_birthday_wish(contact_book_manager, birthday_info, email)
@@ -478,6 +479,7 @@ def generate_birthday_wish(contact_book_manager, name, email):
         print(f"\nWould you like to generate birthday wishes {name['name']}?")
         print("1. Yes")
         print("2. No")
+        print('3. Back to Main Menu')
         user_choice = str(input("Choose option (1/2): "))
         if user_choice == '1':
             response = contact_book_manager.get_birthday_wish(name)
@@ -487,12 +489,14 @@ def generate_birthday_wish(contact_book_manager, name, email):
                 print(f'{wish}')
                 return handle_send_email(name, email, wish)
             else:
-                print("Error generating birthday wishes.\n")
+                print("Error generating birthday wishes.")
         elif user_choice == '2':
-            print(f"Birthday wishes not generated.\n")
+            print(f"Birthday wishes not generated.")
             return
+        elif user_choice == '3':
+            main()
         else:
-            print("Invalid choice. Birthday wishes not generated.\n")
+            print("Invalid choice. Birthday wishes not generated.")
 
 
 def handle_send_email(name, email, wish):
