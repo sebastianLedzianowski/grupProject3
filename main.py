@@ -106,17 +106,35 @@ def contact_menu(contact_book_manager):
                 if not sorted_contacts:
                     print("No contacts found.")
                 else:
-                    template = "| {:^17} | {:^17} | {:^17} | {:^30} | {:^15} |"
-                    header = f" Sorted Contacts by {sort_key} "
-                    print("\n{:-^90}".format(header.center(90)))
-                    print(template.format("Name", "Surname", "Phone number", "Email", "Birthday"))
+                    max_name_length = max(len(contact.get('name', '')) for contact in sorted_contacts)
+                    max_surname_length = max(len(contact.get('surname', '')) for contact in sorted_contacts)
+                    max_phone_number_length = max(len(contact.get('phone_number', '')) for contact in sorted_contacts)
+                    max_email_length = max(len(contact.get('email', '')) for contact in sorted_contacts)
+                    max_birthday_length = max(len(contact.get('birthday', '')) for contact in sorted_contacts)
+                    print(f"\nSorted Contacts by: {sort_key} ")
+                    print("| {:^{}} | {:^{}} | {:^{}} | {:^{}} | {:^{}} |".format('Name', max_name_length, 'Surname',
+                                                                                  max_surname_length, 'Phone number',
+                                                                                  max_phone_number_length, 'Email',
+                                                                                  max_email_length, 'Birthday',
+                                                                                  max_birthday_length))
+                    separator_line = "|{}+{}+{}+{}+{}|".format("-" * (max_name_length + 2),
+                                                               "-" * (max_surname_length + 2),
+                                                               "-" * (max_phone_number_length + 2),
+                                                               "-" * (max_email_length + 2),
+                                                               "-" * (max_birthday_length + 2))
+                    print(separator_line)
                     for contact in sorted_contacts:
-                        formatted_template = template.format(
-                            contact["name"], contact["surname"], contact["phone_number"], contact["email"],
-                            contact["birthday"]
-                        )
-                        print("-" * len(formatted_template))
-                        print(formatted_template)
+                        name = contact.get('name', '')[:max_name_length]
+                        surname = contact.get('surname', '')[:max_surname_length]
+                        phone_number = contact.get('phone_number', '')[:max_phone_number_length]
+                        email = contact.get('email', '')[:max_email_length]
+                        birthday = contact.get('birthday', '')[:max_birthday_length]
+                        print("| {:^{}} | {:^{}} | {:^{}} | {:^{}} | {:^{}} |".format(name, max_name_length, surname,
+                                                                                      max_surname_length, phone_number,
+                                                                                      max_phone_number_length, email,
+                                                                                      max_email_length, birthday,
+                                                                                      max_birthday_length))
+                        print(separator_line)
             elif sort_choice == 4:
                 print("Back to Manage Contacts.")
             else:
