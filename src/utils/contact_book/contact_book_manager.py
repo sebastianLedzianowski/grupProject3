@@ -67,8 +67,9 @@ class ContactBookManager:
                 if note_dict.get(field) == value:
                     duplicates.append(note_dict)
             
-            return duplicates
-            
+            if len(duplicates) > 1: return duplicates
+            else: return None
+
         except Exception as e:
             print(f"An error occurred: {str(e)}")
 
