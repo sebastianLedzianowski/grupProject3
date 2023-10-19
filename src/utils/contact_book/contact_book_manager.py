@@ -29,6 +29,12 @@ class ContactBookManager:
         except Exception as e:
             print(f"An error occurred: {str(e)}")
 
+    def edit_by_criteria(self, search_criteria, updates):
+        try:
+            self.data_repo.update_by_criteria(value_type=AddressBook, search_criteria=search_criteria, updates=updates)
+        except Exception as e:
+            print(f"An error occurred: {str(e)}")
+
     def delete(self, field, value):
         try:
             self.data_repo.delete(value_type=AddressBook, field=field, value=value)

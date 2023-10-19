@@ -74,6 +74,13 @@ class DataRepository:
         """
         collection = self._select_collection(value_type)
         return collection.update_one({field: value}, {'$set': updates})
+    
+
+    def update_by_criteria(self, value_type: Type[Union[AddressBook, NoteBook]], search_criteria: dict, updates: dict):
+        collection = self._select_collection(value_type)
+        return collection.update_one(search_criteria, {'$set': updates})
+
+
 
     def delete(self, value_type: Type[Union[AddressBook, NoteBook]], field: str, value: str):
         """
@@ -89,3 +96,4 @@ class DataRepository:
         """
         collection = self._select_collection(value_type)
         return collection.delete_one({field: value})
+
