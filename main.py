@@ -165,8 +165,8 @@ def choose_contact(contact_book_manager):
                 else:
                     print(f"Duplicates found for {field} = {value}. Choose a duplicate to edit:")
                     display_numbered_contacts(duplicates)
-
-                    chosen_duplicate_index = str(input("Choose the duplicate to edit (1/2/...): ")) - 1
+                    chosen_duplicate = str(input("Choose the duplicate to edit (1/2/...): "))
+                    chosen_duplicate_index = int(chosen_duplicate) - 1
                     if 0 <= int(chosen_duplicate_index) < len(duplicates):
                         _id = duplicates[int(chosen_duplicate_index)]["_id"]
                         contact_edit_delete_menu(contact_book_manager, field, value, _id)
