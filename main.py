@@ -86,7 +86,7 @@ def contact_menu(contact_book_manager):
             contact_book_manager.create(user_data)
             print("Contact added successfully.")
         elif contact_choice == 3:
-            contact_edit_delete_menu(contact_book_manager)
+            choose_contact(contact_book_manager)
         elif contact_choice == 4:
             print("\n===== Sort Contacts =====")
             print("1. Sort by Name")
@@ -129,9 +129,9 @@ def contact_menu(contact_book_manager):
             print("Invalid choice. Choose an option from 1 to 6.")
 
 
-def contact_edit_delete_menu(contact_book_manager):
+def contact_edit_delete_menu(contact_book_manager, field, value, _id=None):
     while True:
-        print("\n===== Edit/Delete Contact =====")
+        print("\n===== Choose option =====")
         print("1. Edit Contact")
         print("2. Delete Contact")
         print("3. Back to Manage Contacts")
@@ -141,9 +141,15 @@ def contact_edit_delete_menu(contact_book_manager):
             print("Error! Enter a number.")
             continue
         if edit_delete_choice == 1:
-            edit_contact(contact_book_manager)
+            if _id != None:
+                edit_contact_by_criteria(contact_book_manager, field, _id)
+            else:
+                edit_contact(contact_book_manager, field, value)
         elif edit_delete_choice == 2:
-            delete_contact(contact_book_manager)
+            if _id != None:
+                delete_contact(contact_book_manager, "_id", _id)
+            else:    
+                delete_contact(contact_book_manager, field, value)
         elif edit_delete_choice == 3:
             print("Back to Manage Contacts.")
             break
@@ -151,101 +157,66 @@ def contact_edit_delete_menu(contact_book_manager):
             print("Invalid choice. Choose an option from 1 to 3.")
 
 
-def edit_contact(contact_book_manager):
-    print("\n===== Edit Contact =====")
-    print("1. Edit by Name")
-    print("2. Edit by Surname")
-    print("3. Edit by Phone number")
-    print("4. Edit by Email")
-    print("5. Edit by Birthday")
-    print("6. Back to Edit/Delete Contact Menu")
-    try:
-        edit_choice = int(input("Choose edit option (1/2/3/4/5/6): "))
-    except ValueError:
-        print("Error! Enter a number.")
-        return
+def choose_contact(contact_book_manager):
+    while True:
+        print("\n===== Choose Contact by =====")
+        print("1. Choose by Name")
+        print("2. Choose by Surname")
+        print("3. Choose by Phone number")
+        print("4. Choose by Email")
+        print("5. Choose by Birthday")
+        print("6. Back to Manage Contacts Menu")
 
-    if edit_choice in range(1, 6):
-        fields = ["name", "surname", "phone_number", "email", "birthday"]
-        field = fields[edit_choice - 1]
-        value = input(f"Enter the current value of the {field}: ")
-        duplicates = contact_book_manager.look_for_doubles(field, value)
+        try:
+            choice = int(input("Choose edit option (1/2/3/4/5/6): "))
+        except ValueError:
+            print("Error! Enter a number.")
+            return
 
-        if duplicates:
-            print("Duplicates found. Choose a duplicate to edit:")
-            for i, duplicate in enumerate(duplicates, start=1):
-                print(f"{i}. {duplicate}")
+        if choice in range(1, 6):
+            fields = ["name", "surname", "phone_number", "email", "birthday"]
+            field = fields[choice - 1]
+            value = input(f"Enter the current value of the {field}: ")
+            duplicates = contact_book_manager.look_for_doubles(field, value)
 
-            try:
-                chosen_duplicate_index = int(input("Choose the duplicate to edit (1/2/...): ")) - 1
-                if 0 <= chosen_duplicate_index < len(duplicates):
-                    chosen_duplicate_data = duplicates[chosen_duplicate_index]
-                    current_value = chosen_duplicate_data[field]
-                    print(f"Current value of {field}: {current_value}")
-                    new_value = input(f"Enter the new value for {field}: ")
-                    contact_book_manager.edit(field, current_value, {field: new_value})
-                    print(f"Contact edited successfully. {field} updated to {new_value}.")
-                else:
-                    print("Invalid choice. No contact edited.")
-            except ValueError:
-                print("Invalid input. Please enter a number.")
+            if duplicates:
+                print("Duplicates found. Choose a duplicate to edit:")
+                for i, duplicate in enumerate(duplicates, start=1):
+                    print(f"{i}. {duplicate}")
+
+                try:
+                    chosen_duplicate_index = int(input("Choose the duplicate to edit (1/2/...): ")) - 1
+                    if 0 <= chosen_duplicate_index < len(duplicates):
+                        _id = duplicates[chosen_duplicate_index]["_id"]
+                        contact_edit_delete_menu(contact_book_manager, field, value)
+                    else:
+                        print("Invalid choice. No contact edited.")
+                except ValueError:
+                    print("Invalid input. Please enter a number.")
+            else:
+                contact_edit_delete_menu(contact_book_manager, field, value)
+        elif choice == 6:
+            print("Back to Choose Contact Menu.")
+            break
         else:
-            new_value = input(f"Enter the new value for {field}: ")
-
-            contact_book_manager.edit(field, value, {field: new_value})
-            print("Contact edited successfully.")
-    elif edit_choice == 6:
-        print("Back to Edit/Delete Contact Menu.")
-    else:
-        print("Invalid choice. Choose an option from 1 to 6.")
+            print("Invalid choice. Choose an option from 1 to 6.")
 
 
-def delete_contact(contact_book_manager):
-    print("\n===== Delete Contact =====")
-    print("1. Delete by Name")
-    print("2. Delete by Surname")
-    print("3. Delete by Phone number")
-    print("4. Delete by Email")
-    print("5. Delete by Birthday")
-    print("6. Back to Edit/Delete Contact Menu")
+def edit_contact(contact_book_manager, field, value):
+    new_value = input(f"Enter the new value for {field}: ")
+    contact_book_manager.edit(field, value, {field: new_value})
+    print("Contact edited successfully.")
 
-    try:
-        delete_choice = int(input("Choose delete option (1/2/3/4/5/6): "))
-    except ValueError:
-        print("Error! Enter a number.")
-        return
+def edit_contact_by_criteria(contact_book_manager, field, _id):
+    new_value = input(f"Enter the new value for {field}: ")
+    search_criteria = {"_id":_id}
+    updates = {field:new_value}
+    contact_book_manager.edit_by_criteria(search_criteria, updates)
+    print("Contact edited successfully.")
 
-    if delete_choice in range(1, 6):
-        fields = ["name", "surname", "phone number", "email", "birthday"]
-        field = fields[delete_choice - 1]
-        value = input(f"Enter the value of the {field} to delete: ")
-        duplicates = contact_book_manager.look_for_doubles(field, value)
-
-        if duplicates:
-            print("Found duplicates:")
-            for i, duplicate in enumerate(duplicates, start=1):
-                print(f"{i}. {duplicate}")
-
-            try:
-                user_choice = int(input("Choose the number of the duplicate to delete: "))
-                chosen_duplicate_index = user_choice - 1
-                if 0 <= chosen_duplicate_index < len(duplicates):
-                    chosen_duplicate_data = duplicates[chosen_duplicate_index]
-                    contact_book_manager.delete(field, chosen_duplicate_data[field])
-                    print("Contact deleted successfully.")
-                else:
-                    print("Invalid choice. Please enter a valid number.")
-            except ValueError:
-                print("Invalid input. Please enter a number.")
-        else:
-            print("No duplicates found. Proceeding with the delete.")
-            contact_book_manager.delete(field, value)
-            print("Contact deleted successfully.")
-    elif delete_choice == 6:
-        print("Back to Edit/Delete Contact Menu.")
-    else:
-        print("Invalid choice. Choose an option from 1 to 6.")
-
+def delete_contact(contact_book_manager, field, value):
+    contact_book_manager.delete(field, value)
+    print("Contact deleted successfully.")
 
 def notes_menu(notes_book_manager):
     while True:
