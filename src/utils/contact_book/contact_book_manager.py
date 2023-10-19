@@ -73,6 +73,7 @@ class ContactBookManager:
         except Exception as e:
             print(f"An error occurred: {str(e)}")
 
+
     def get_days_to_birthday(self):
         today = date.today()
         today_to_30 = today + timedelta(days=30)
