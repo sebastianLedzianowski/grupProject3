@@ -36,6 +36,7 @@ def main():
         else:
             print("Invalid choice. Choose an option from 1 to 3.")
 
+
 def display_contacts(contacts):
     if not contacts:
         print("No contacts found.")
@@ -61,11 +62,12 @@ def display_contacts(contacts):
             email = contact.get('email', '')[:max_email_length]
             birthday = contact.get('birthday', '')[:max_birthday_length]
             print("| {:^{}} | {:^{}} | {:^{}} | {:^{}} | {:^{}} |".format(name, max_name_length, surname,
-                                                                              max_surname_length, phone_number,
-                                                                              max_phone_number_length, email,
-                                                                              max_email_length, birthday,
-                                                                              max_birthday_length))
+                                                                          max_surname_length, phone_number,
+                                                                          max_phone_number_length, email,
+                                                                          max_email_length, birthday,
+                                                                          max_birthday_length))
             print(separator_line)
+
 
 def contact_menu(contact_book_manager):
     while True:
@@ -237,6 +239,8 @@ def display_numbered_contacts(contacts):
             max_phone_number_length, email, max_email_length, birthday, max_birthday_length))
 
         print(separator_line)
+
+
 def contact_edit_delete_menu(contact_book_manager, field, value, _id=None):
     while True:
         print("\n===== Choose option =====")
@@ -357,6 +361,7 @@ def notes_menu(notes_book_manager):
             break
         else:
             print("Invalid choice. Choose an option from 1 to 6.")
+
 
 def choose_note(notes_book_manager):
     while True:
