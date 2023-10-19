@@ -20,21 +20,16 @@ def main():
         print("2. Manage Notes")
         print("3. Check Days Until Next Birthday")
         print("4. Exit Program")
-        try:
-            choice = int(input("Choose option (1/2/3/4): "))
-        except ValueError:
-            print("Error! Enter a number.")
-            continue
-        if choice == 1:
+        choice = str(input("Choose option (1/2/3/4): "))
+        if choice == '1':
             contact_menu(contact_book_manager)
-        elif choice == 2:
+        elif choice == '2':
             notes_menu(notes_book_manager)
-        elif choice == 3:
+        elif choice == '3':
             check_birthday_menu(contact_book_manager)
-        elif choice == 4:
+        elif choice == '4':
             print("Closing the program. Goodbye!")
             break
-
         else:
             print("Invalid choice. Choose an option from 1 to 3.")
 
@@ -79,21 +74,17 @@ def contact_menu(contact_book_manager):
         print("3. Choose Contact to edit/delete")
         print("4. Sort Contacts")
         print("5. Back to Main Menu")
-        try:
-            contact_choice = int(input("Choose option (1/2/3/4/5/6): "))
-        except ValueError:
-            print("Error! Enter a number.")
-            continue
-        if contact_choice == 1:
+        contact_choice = str(input("Choose option (1/2/3/4/5/6): "))
+        if contact_choice == '1':
             contacts = contact_book_manager.read_all()
             display_contacts(contacts)
-        elif contact_choice == 2:
+        elif contact_choice == '2':
             user_data = ContactBookCollector.get_user_input()
             contact_book_manager.create(user_data)
             print("Contact added successfully.")
-        elif contact_choice == 3:
+        elif contact_choice == '3':
             choose_contact(contact_book_manager)
-        elif contact_choice == 4:
+        elif contact_choice == '4':
             print("\n===== Sort Contacts =====")
             print("1. Sort by Name")
             print("2. Sort by Surname")
@@ -101,14 +92,10 @@ def contact_menu(contact_book_manager):
             print("4. Sort by Email")
             print("5. Sort by Birthday")
             print("6. Back to Manage Contacts")
-            try:
-                sort_choice = int(input("Choose sort option (1/2/3/4/5/6): "))
-            except ValueError:
-                print("Error! Enter a number.")
-                continue
-            if sort_choice in range(1, 6):
+            sort_choice = str(input("Choose sort option (1/2/3/4/5/6): "))
+            if int(sort_choice) in range(1, 6):
                 fields = ["name", "surname", "phone number", "email", "birthday"]
-                sort_key = fields[sort_choice - 1]
+                sort_key = fields[int(sort_choice) - 1]
                 sorted_contacts = contact_book_manager.get_sorted_contacts(sort_key)
                 if not sorted_contacts:
                     print("No contacts found.")
@@ -142,11 +129,11 @@ def contact_menu(contact_book_manager):
                                                                                       max_email_length, birthday,
                                                                                       max_birthday_length))
                         print(separator_line)
-            elif sort_choice == 4:
+            elif sort_choice == '6':
                 print("Back to Manage Contacts.")
             else:
                 print("Invalid choice. Choose an option from 1 to 6.")
-        elif contact_choice == 5:
+        elif contact_choice == '5':
             print("Back to Main Menu.")
             break
         else:
@@ -162,16 +149,10 @@ def choose_contact(contact_book_manager):
         print("4. Choose by Email")
         print("5. Choose by Birthday")
         print("6. Back to Manage Contacts Menu")
-
-        try:
-            choice = int(input("Choose edit option (1/2/3/4/5/6): "))
-        except ValueError:
-            print("Error! Enter a number.")
-            return
-
-        if choice in range(1, 6):
+        choice = str(input("Choose edit option (1/2/3/4/5/6): "))
+        if int(choice) in range(1, 6):
             fields = ["name", "surname", "phone_number", "email", "birthday"]
-            field = fields[choice - 1]
+            field = fields[int(choice) - 1]
             value = input(f"Enter the current value of the {field}: ")
             duplicates = contact_book_manager.look_for_doubles(field, value)
 
@@ -185,15 +166,12 @@ def choose_contact(contact_book_manager):
                     print(f"Duplicates found for {field} = {value}. Choose a duplicate to edit:")
                     display_numbered_contacts(duplicates)
 
-                    try:
-                        chosen_duplicate_index = int(input("Choose the duplicate to edit (1/2/...): ")) - 1
-                        if 0 <= chosen_duplicate_index < len(duplicates):
-                            _id = duplicates[chosen_duplicate_index]["_id"]
-                            contact_edit_delete_menu(contact_book_manager, field, value, _id)
-                        else:
-                            print("Invalid choice. No contact edited.")
-                    except ValueError:
-                        print("Invalid input. Please enter a number.")
+                    chosen_duplicate_index = str(input("Choose the duplicate to edit (1/2/...): ")) - 1
+                    if 0 <= int(chosen_duplicate_index) < len(duplicates):
+                        _id = duplicates[int(chosen_duplicate_index)]["_id"]
+                        contact_edit_delete_menu(contact_book_manager, field, value, _id)
+                    else:
+                        print("Invalid choice. No contact edited.")
             else:
                 all_contacts = contact_book_manager.read_all()
                 matching_contacts = [contact for contact in all_contacts if contact[field] == value]
@@ -205,7 +183,7 @@ def choose_contact(contact_book_manager):
                     display_numbered_contacts(matching_contacts)
                     contact_edit_delete_menu(contact_book_manager, field, value)
             break
-        elif choice == 6:
+        elif choice == '6':
             print("Back to Choose Contact Menu.")
             break
         else:
@@ -249,24 +227,20 @@ def contact_edit_delete_menu(contact_book_manager, field, value, _id=None):
         print("1. Edit Contact")
         print("2. Delete Contact")
         print("3. Back to Manage Contacts")
-        try:
-            edit_delete_choice = int(input("Choose option (1/2/3): "))
-        except ValueError:
-            print("Error! Enter a number.")
-            continue
-        if edit_delete_choice == 1:
+        edit_delete_choice = str(input("Choose option (1/2/3): "))
+        if edit_delete_choice == '1':
             if _id is not None:
                 edit_contact_by_criteria(contact_book_manager, field, _id)
             else:
                 edit_contact(contact_book_manager, field, value)
             break
-        elif edit_delete_choice == 2:
+        elif edit_delete_choice == '2':
             if _id is not None:
                 delete_contact(contact_book_manager, "_id", _id)
             else:
                 delete_contact(contact_book_manager, field, value)
             break
-        elif edit_delete_choice == 3:
+        elif edit_delete_choice == '3':
             print("Back to Manage Contacts.")
             break
         else:
@@ -300,13 +274,8 @@ def notes_menu(notes_book_manager):
         print("3. Choose Note to Edit/Delete")
         print("4. Sort Notes")
         print("5. Back to Main Menu")
-        try:
-            notes_choice = int(input("Choose option (1/2/3/4/5/6): "))
-        except ValueError:
-            print("Error! Enter a number.")
-            continue
-
-        if notes_choice == 1:
+        notes_choice = str(input("Choose option (1/2/3/4/5/6): "))
+        if notes_choice == '1':
             notes = notes_book_manager.read_all()
             note_number = 1
             if not notes:
@@ -321,25 +290,21 @@ def notes_menu(notes_book_manager):
                     print(f'Tags: {tags}')
                     print(f'Content: {content}')
                     note_number += 1
-        elif notes_choice == 2:
+        elif notes_choice == '2':
             user_data = NotesBookCollector.get_user_input()
             notes_book_manager.create(user_data)
-        elif notes_choice == 3:
+        elif notes_choice == '3':
             choose_note(notes_book_manager)
-        elif notes_choice == 4:
+        elif notes_choice == '4':
             print("\n===== Sort Notes =====")
             print("1. Sort by Title")
             print("2. Sort by Tag")
             print("3. Sort by Content")
             print("4. Back to Manage Notes")
-            try:
-                sort_choice = int(input("Choose sort option (1/2/3/4): "))
-            except ValueError:
-                print("Error! Enter a number.")
-                continue
-            if sort_choice in range(1, 4):
+            sort_choice = str(input("Choose sort option (1/2/3/4): "))
+            if int(sort_choice) in range(1, 4):
                 fields = ["title", "tag", "content"]
-                sort_key = fields[sort_choice - 1]
+                sort_key = fields[int(sort_choice) - 1]
                 sorted_notes = notes_book_manager.sorted(sort_key)
                 note_number = 1
                 if not sorted_notes:
@@ -354,11 +319,11 @@ def notes_menu(notes_book_manager):
                         print(f'Tags: {tags}')
                         print(f'Content: {content}')
                         note_number += 1
-            elif sort_choice == 4:
+            elif sort_choice == '4':
                 print("Back to Manage Notes.")
             else:
                 print("Invalid choice. Choose an option from 1 to 4.")
-        elif notes_choice == 5:
+        elif notes_choice == '5':
             print("Back to Main Menu.")
             break
         else:
@@ -372,15 +337,10 @@ def choose_note(notes_book_manager):
         print("2. Choose by Tag")
         print("3. Choose by Content")
         print("4. Choose to Edit/Delete Note Menu")
-        try:
-            choice = int(input("Choose edit option (1/2/3/4): "))
-        except ValueError:
-            print("Error! Enter a number.")
-            return
-
-        if choice in range(1, 4):
+        choice = str(input("Choose edit option (1/2/3/4): "))
+        if int(choice) in range(1, 4):
             fields = ["title", "tag", "content"]
-            field = fields[choice - 1]
+            field = fields[int(choice) - 1]
             value = input(f"Enter the current value of the {field}: ")
             duplicates = notes_book_manager.look_for_doubles(field, value)
 
@@ -401,7 +361,7 @@ def choose_note(notes_book_manager):
             else:
                 contact_edit_delete_menu(notes_book_manager, field, value)
             break
-        elif choice == 4:
+        elif choice == '4':
             print("Back to Choose Note Menu.")
             break
         else:
@@ -414,24 +374,20 @@ def note_edit_delete_menu(notes_book_manager, field, value, _id=None):
         print("1. Edit Note")
         print("2. Delete Note")
         print("3. Back to Manage Notes")
-        try:
-            edit_delete_choice = int(input("Choose option (1/2/3): "))
-        except ValueError:
-            print("Error! Enter a number.")
-            continue
-        if edit_delete_choice == 1:
+        edit_delete_choice = str(input("Choose option (1/2/3): "))
+        if edit_delete_choice == '1':
             if _id is not None:
                 edit_contact_by_criteria(notes_book_manager, field, _id)
             else:
                 edit_contact(notes_book_manager, field, value)
             break
-        elif edit_delete_choice == 2:
+        elif edit_delete_choice == '2':
             if _id is not None:
                 delete_contact(notes_book_manager, "_id", _id)
             else:
                 delete_contact(notes_book_manager, field, value)
             break
-        elif edit_delete_choice == 3:
+        elif edit_delete_choice == '3':
             print("Back to Manage Notes.")
             break
         else:
