@@ -24,7 +24,8 @@ A contact and notes management system integrated with MongoDB.
 
 1. **Clone the Repository**: `git clone https://github.com/sebastianLedzianowski/grupProject3.git`
 2. **Navigate to the Project Directory**: `cd grupProject3`
-3. **Install Required Dependencies**: `pip install -r requirements.txt`
+3. **Install Python project**: `python -m pip install .`
+4. **Run Project**: `grupProject3`
 
 
 ## 🛠️Configuration

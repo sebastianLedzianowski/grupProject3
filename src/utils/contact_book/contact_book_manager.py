@@ -25,7 +25,13 @@ class ContactBookManager:
 
     def edit(self, field, value, updates):
         try:
-            self.data_repo.update(value_type=AddressBook, field=field, value=value, updates={"$set": {field: updates}})
+            self.data_repo.update(value_type=AddressBook, field=field, value=value, updates=updates)
+        except Exception as e:
+            print(f"An error occurred: {str(e)}")
+
+    def edit_by_criteria(self, search_criteria, updates):
+        try:
+            self.data_repo.update_by_criteria(value_type=AddressBook, search_criteria=search_criteria, updates=updates)
         except Exception as e:
             print(f"An error occurred: {str(e)}")
 
@@ -51,6 +57,21 @@ class ContactBookManager:
         except Exception as e:
             print(f"An error occurred: {str(e)}")
             return []
+        
+    def look_for_doubles(self, field, value):
+        try:
+            notes = self.data_repo.read_all(AddressBook)
+            duplicates = []
+
+            for note_dict in notes:
+                if note_dict.get(field) == value:
+                    duplicates.append(note_dict)
+            
+            if len(duplicates) > 1: return duplicates
+            else: return None
+
+        except Exception as e:
+            print(f"An error occurred: {str(e)}")
 
     def get_days_to_birthday(self):
         today = date.today()
@@ -58,14 +79,14 @@ class ContactBookManager:
         contacts = self.data_repo.read_all(AddressBook)
         upcoming_birthdays = []
         for contact in contacts:
-            birthday = datetime.strptime(contact["birthday"], "%Y-%m-%d")
+            birthday = datetime.strptime(contact['birthday'], "%Y-%m-%d")
             upcoming_birthday = date(today.year, birthday.month, birthday.day)
-            age = today.year - birthday.year - ((today.month, today.day) < (birthday.month, birthday.day))
             days_to_birthdays = (upcoming_birthday - today).days
             if today.day == birthday.day and today.month == birthday.month:
-                upcoming_birthdays.append({"name": contact["name"],
-                                           "surname": contact["surname"],
-                                           "birthday": contact["birthday"],
+                upcoming_birthdays.append({"name": contact['name'],
+                                           "surname": contact['surname'],
+                                           "birthday": contact['birthday'],
+                                           "email": contact['email'],
                                            "days_to_birthday": days_to_birthdays
                                            })
             if today < upcoming_birthday <= today_to_30:
