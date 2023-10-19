@@ -348,16 +348,14 @@ def choose_note(notes_book_manager):
                 print("Duplicates found. Choose a duplicate to edit:")
                 for i, duplicate in enumerate(duplicates, start=1):
                     print(f"{i}. {duplicate}")
+                chosen_duplicate = str(input("Choose the duplicate to edit (1/2/...): "))
+                chosen_duplicate_index = int(chosen_duplicate) - 1
+                if 0 <= chosen_duplicate_index < len(duplicates):
+                    _id = duplicates[chosen_duplicate_index]["_id"]
+                    contact_edit_delete_menu(notes_book_manager, field, value, _id)
+                else:
+                    print("Invalid choice. No note edited.")
 
-                try:
-                    chosen_duplicate_index = int(input("Choose the duplicate to edit (1/2/...): ")) - 1
-                    if 0 <= chosen_duplicate_index < len(duplicates):
-                        _id = duplicates[chosen_duplicate_index]["_id"]
-                        contact_edit_delete_menu(notes_book_manager, field, value, _id)
-                    else:
-                        print("Invalid choice. No note edited.")
-                except ValueError:
-                    print("Invalid input. Please enter a number.")
             else:
                 contact_edit_delete_menu(notes_book_manager, field, value)
             break
