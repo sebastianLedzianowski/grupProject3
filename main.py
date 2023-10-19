@@ -358,7 +358,6 @@ def notes_menu(notes_book_manager):
         else:
             print("Invalid choice. Choose an option from 1 to 6.")
 
-
 def choose_note(notes_book_manager):
     while True:
         print("\n===== Choose Note by =====")
