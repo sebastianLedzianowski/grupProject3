@@ -11,7 +11,6 @@ from src.utils.notes_book.notesbook_collector import NotesBookCollector
 from src.utils.send_email import send_email
 
 
-
 def main():
     contact_book_manager = ContactBookManager()
     notes_book_manager = NotesBookManager()
@@ -256,13 +255,13 @@ def contact_edit_delete_menu(contact_book_manager, field, value, _id=None):
             print("Error! Enter a number.")
             continue
         if edit_delete_choice == 1:
-            if _id != None:
+            if _id is not None:
                 edit_contact_by_criteria(contact_book_manager, field, _id)
             else:
                 edit_contact(contact_book_manager, field, value)
             break
         elif edit_delete_choice == 2:
-            if _id != None:
+            if _id is not None:
                 delete_contact(contact_book_manager, "_id", _id)
             else:
                 delete_contact(contact_book_manager, field, value)
@@ -421,13 +420,13 @@ def note_edit_delete_menu(notes_book_manager, field, value, _id=None):
             print("Error! Enter a number.")
             continue
         if edit_delete_choice == 1:
-            if _id != None:
+            if _id is not None:
                 edit_contact_by_criteria(notes_book_manager, field, _id)
             else:
                 edit_contact(notes_book_manager, field, value)
             break
         elif edit_delete_choice == 2:
-            if _id != None:
+            if _id is not None:
                 delete_contact(notes_book_manager, "_id", _id)
             else:
                 delete_contact(notes_book_manager, field, value)
@@ -476,11 +475,11 @@ def check_birthday_menu(contact_book_manager):
 
 def generate_birthday_wish(contact_book_manager, name, email):
     while True:
-        print(f"Would you like to generate birthday wishes {name['name']}?")
+        print(f"\nWould you like to generate birthday wishes {name['name']}?")
         print("1. Yes")
         print("2. No")
-        user_choice = int(input("Choose option (1/2): "))
-        if user_choice == 1:
+        user_choice = str(input("Choose option (1/2): "))
+        if user_choice == '1':
             response = contact_book_manager.get_birthday_wish(name)
             if response and response.status_code == 200:
                 wish = response.json()['wish']
@@ -488,12 +487,12 @@ def generate_birthday_wish(contact_book_manager, name, email):
                 print(f'{wish}')
                 return handle_send_email(name, email, wish)
             else:
-                print("Error generating birthday wishes.")
-        elif user_choice == 2:
-            print("Birthday wishes not generated.")
-            return main()
+                print("Error generating birthday wishes.\n")
+        elif user_choice == '2':
+            print(f"Birthday wishes not generated.\n")
+            return
         else:
-            print("Invalid choice. Birthday wishes not generated.")
+            print("Invalid choice. Birthday wishes not generated.\n")
 
 
 def handle_send_email(name, email, wish):
@@ -501,8 +500,8 @@ def handle_send_email(name, email, wish):
         print(f"\nDo you want to send an email with birthday wishes {name['name']}?")
         print("1. Yes")
         print("2. No")
-        user_choice = int(input("Choose option (1/2):\n "))
-        if user_choice == 1:
+        user_choice = str(input("Choose option (1/2):\n "))
+        if user_choice == '1':
             return send_email(email, "Birthday Wishes", wish)
         print("Invalid input. Please enter a number.\n")
 
