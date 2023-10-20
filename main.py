@@ -94,7 +94,7 @@ def contact_menu(contact_book_manager):
             print("6. Back to Manage Contacts")
             sort_choice = str(input("Choose sort option (1/2/3/4/5/6): "))
             if int(sort_choice) in range(1, 6):
-                fields = ["name", "surname", "phone number", "email", "birthday"]
+                fields = ["name", "surname", "phone_number", "email", "birthday"]
                 sort_key = fields[int(sort_choice) - 1]
                 sorted_contacts = contact_book_manager.get_sorted_contacts(sort_key)
                 if not sorted_contacts:
