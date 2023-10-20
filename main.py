@@ -413,7 +413,7 @@ def delete_note(notes_book_manager, field, value):
 
 def check_birthday_menu(contact_book_manager):
     while True:
-        upcoming_birthdays = contact_book_manager.get_days_to_birthday()
+        upcoming_birthdays = contact_book_manager.get_days_to_birthday
         print("\n======== Check Days Until Next Birthday ========")
         if not upcoming_birthdays:
             print("No upcoming birthdays found.")

@@ -212,15 +212,18 @@ def test_get_days_to_birthday(contact_manager):
     manager.create(user_data3)
 
     try:
-        upcoming_birthdays = manager.get_days_to_birthday()
+        upcoming_birthdays = manager.get_days_to_birthday
 
         # Check if the birthdays are fetched correctly
         assert any(contact['name'] == user_data1['name'] and contact['days_to_birthday'] == 2 for contact in
-                   upcoming_birthdays), f"Expected 2 days to birthday for {user_data1['name']}, but got a different value."
+                   upcoming_birthdays), f"Expected 2 days to birthday for {user_data1['name']}," \
+                                        f" but got a different value."
         assert any(contact['name'] == user_data2['name'] and contact['days_to_birthday'] == 0 for contact in
-                   upcoming_birthdays), f"Expected 0 days to birthday for {user_data2['name']}, but got a different value."
+                   upcoming_birthdays), f"Expected 0 days to birthday for {user_data2['name']}," \
+                                        f" but got a different value."
         assert not any(contact['name'] == user_data3['name'] for contact in
-                       upcoming_birthdays), f"{user_data3['name']}'s birthday should not be in the upcoming birthdays list."
+                       upcoming_birthdays), f"{user_data3['name']}'s " \
+                                            f"birthday should not be in the upcoming birthdays list."
     finally:
         # Append the _ids of the created contacts to inserted_ids for cleanup
         contacts = manager.read_all()
