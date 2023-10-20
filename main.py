@@ -93,7 +93,7 @@ def contact_menu(contact_book_manager):
             print("5. Sort by Birthday")
             print("6. Back to Manage Contacts")
             sort_choice = str(input("Choose sort option (1/2/3/4/5/6): "))
-            if int(sort_choice) in range(1, 6):
+            if sort_choice.isdigit() and int(sort_choice) in range(1, 6):
                 fields = ["name", "surname", "phone_number", "email", "birthday"]
                 sort_key = fields[int(sort_choice) - 1]
                 sorted_contacts = contact_book_manager.get_sorted_contacts(sort_key)
@@ -150,7 +150,7 @@ def choose_contact(contact_book_manager):
         print("5. Choose by Birthday")
         print("6. Back to Manage Contacts Menu")
         choice = str(input("Choose edit option (1/2/3/4/5/6): "))
-        if int(choice) in range(1, 6):
+        if choice.isdigit() and int(choice) in range(1, 6):
             fields = ["name", "surname", "phone_number", "email", "birthday"]
             field = fields[int(choice) - 1]
             value = input(f"Enter the current value of the {field}: ")
@@ -302,7 +302,7 @@ def notes_menu(notes_book_manager):
             print("3. Sort by Content")
             print("4. Back to Manage Notes")
             sort_choice = str(input("Choose sort option (1/2/3/4): "))
-            if int(sort_choice) in range(1, 4):
+            if sort_choice.isdigit() and int(sort_choice) in range(1, 4):
                 fields = ["title", "tag", "content"]
                 sort_key = fields[int(sort_choice) - 1]
                 sorted_notes = notes_book_manager.sorted(sort_key)
@@ -336,9 +336,9 @@ def choose_note(notes_book_manager):
         print("1. Choose by Title")
         print("2. Choose by Tag")
         print("3. Choose by Content")
-        print("4. Choose to Edit/Delete Note Menu")
+        print("4. Back to Manage Notes Menu")
         choice = str(input("Choose edit option (1/2/3/4): "))
-        if int(choice) in range(1, 4):
+        if choice.isdigit() and int(choice) in range(1, 4):
             fields = ["title", "tag", "content"]
             field = fields[int(choice) - 1]
             value = input(f"Enter the current value of the {field}: ")
@@ -346,24 +346,44 @@ def choose_note(notes_book_manager):
 
             if duplicates:
                 print("Duplicates found. Choose a duplicate to edit:")
-                for i, duplicate in enumerate(duplicates, start=1):
-                    print(f"{i}. {duplicate}")
+                display_numbered_notes(duplicates)
                 chosen_duplicate = str(input("Choose the duplicate to edit (1/2/...): "))
                 chosen_duplicate_index = int(chosen_duplicate) - 1
                 if 0 <= chosen_duplicate_index < len(duplicates):
                     _id = duplicates[chosen_duplicate_index]["_id"]
-                    contact_edit_delete_menu(notes_book_manager, field, value, _id)
+                    note_edit_delete_menu(notes_book_manager, field, value, _id)
                 else:
                     print("Invalid choice. No note edited.")
 
             else:
-                contact_edit_delete_menu(notes_book_manager, field, value)
+                all_notes = notes_book_manager.read_all()
+                matching_notes = [note for note in all_notes if note[field] == value]
+
+                if not matching_notes:
+                    print(f"No note found with {field} = {value}. Please choose a valid note.")
+                else:
+                    print(f"Found a single note with {field} = {value}:")
+                    display_numbered_notes(matching_notes)
+                    note_edit_delete_menu(notes_book_manager, field, value)
             break
         elif choice == '4':
             print("Back to Choose Note Menu.")
             break
         else:
             print("Invalid choice. Choose an option from 1 to 4.")
+
+
+def display_numbered_notes(notes):
+    note_number = 1
+    for note in notes:
+        title = note.get("title", "")
+        tags = ", ".join(note.get("tag", []))
+        content = note.get("content", "")
+        print(f'\nNote Number: {note_number}')
+        print(f'Title: {title}')
+        print(f'Tags: {tags}')
+        print(f'Content: {content}')
+        note_number += 1
 
 
 def note_edit_delete_menu(notes_book_manager, field, value, _id=None):
