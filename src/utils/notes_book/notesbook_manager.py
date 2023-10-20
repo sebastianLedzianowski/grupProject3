@@ -2,6 +2,7 @@ from src.mongodb.db_connection import DatabaseConnectionManager
 from src.mongodb.db_repository import DataRepository
 from src.mongodb.models import NoteBook
 
+
 class NotesBookManager:
     def __init__(self):
         self.db_manager = DatabaseConnectionManager()
@@ -10,8 +11,8 @@ class NotesBookManager:
     def create(self, user_data):
         try:
             self.data_repo.create(NoteBook(title=user_data['title'],
-                                              tag=user_data['tag'],
-                                              content=user_data['content']))
+                                           tag=user_data['tag'],
+                                           content=user_data['content']))
         except Exception as e:
             print(f"An error occurred: {str(e)}")
 
@@ -45,12 +46,12 @@ class NotesBookManager:
             self.data_repo.update_by_criteria(value_type=NoteBook, search_criteria=search_criteria, updates=updates)
         except Exception as e:
             print(f"An error occurred: {str(e)}")
-    
+
     def delete(self, field, value):
         try:
             self.data_repo.delete(value_type=NoteBook, field=field, value=value)
         except Exception as e:
-            print(f"An error occurred: {str(e)}")    
+            print(f"An error occurred: {str(e)}")
 
     def look_for_doubles(self, field, value):
         try:
@@ -60,9 +61,11 @@ class NotesBookManager:
             for note_dict in notes:
                 if note_dict.get(field) == value:
                     duplicates.append(note_dict)
-            
-            if len(duplicates) > 1: return duplicates
-            else: return None
-            
+
+            if len(duplicates) > 1:
+                return duplicates
+            else:
+                return None
+
         except Exception as e:
             print(f"An error occurred: {str(e)}")
