@@ -74,7 +74,7 @@ def contact_menu(contact_book_manager):
         print("3. Choose Contact to edit/delete")
         print("4. Sort Contacts")
         print("5. Back to Main Menu")
-        contact_choice = str(input("Choose option (1/2/3/4/5/6): "))
+        contact_choice = str(input("Choose option (1/2/3/4/5): "))
         if contact_choice == '1':
             contacts = contact_book_manager.read_all()
             display_contacts(contacts)
@@ -137,7 +137,7 @@ def contact_menu(contact_book_manager):
             print("Back to Main Menu.")
             break
         else:
-            print("Invalid choice. Choose an option from 1 to 6.")
+            print("Invalid choice. Choose an option from 1 to 5.")
 
 
 def choose_contact(contact_book_manager):
@@ -274,7 +274,7 @@ def notes_menu(notes_book_manager):
         print("3. Choose Note to Edit/Delete")
         print("4. Sort Notes")
         print("5. Back to Main Menu")
-        notes_choice = str(input("Choose option (1/2/3/4/5/6): "))
+        notes_choice = str(input("Choose option (1/2/3/4/5): "))
         if notes_choice == '1':
             notes = notes_book_manager.read_all()
             note_number = 1
@@ -327,7 +327,7 @@ def notes_menu(notes_book_manager):
             print("Back to Main Menu.")
             break
         else:
-            print("Invalid choice. Choose an option from 1 to 6.")
+            print("Invalid choice. Choose an option from 1 to 5.")
 
 
 def choose_note(notes_book_manager):
