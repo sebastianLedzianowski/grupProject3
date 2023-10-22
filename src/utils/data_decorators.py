@@ -11,7 +11,8 @@ def validate_input(prompt):
                 if not user_input:
                     print("Input is empty. Please provide some input.")
                 else:
-                    return user_input
+                    formatted_input = user_input.capitalize()
+                    return formatted_input
 
         return wrapper
 

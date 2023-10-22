@@ -1,6 +1,7 @@
+from src.menu.check_birthday_menu import check_birthday_menu
 from src.utils.contact_book.contact_book_manager import ContactBookManager
 from src.utils.notes_book.notesbook_manager import NotesBookManager
-from src.menu.contact_menu import contact_menu, check_birthday_menu
+from src.menu.contact_menu import contact_menu
 from src.menu.note_menu import notes_menu
 
 
