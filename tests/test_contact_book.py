@@ -120,7 +120,7 @@ def test_get_sorted_contacts(contact_manager):
     manager.create(user_data1)
 
     user_data2 = {
-        'name': 'Alpha',
+        'name': 'Alapha',
         'surname': 'Alphor',
         'phone_number': '123456789',
         'email': 'alpha.alphor@example.com',

@@ -8,6 +8,7 @@ A contact and notes management system integrated with MongoDB.
 - [Installation](#installation)
 - [Configuration](#configuration)
 - [Usage](#usage)
+- [Testing](#testing)
 - [Contribution](#contribution)
 - [License](#license)
 
@@ -35,6 +36,8 @@ Set up your `.env` file in the root directory with the following variables:
 ```bash
 # Mongodb settings
 DB_PORT=
+DB_USR=
+DB_PASSWD=
 DB_IP=
 DB_URL=mongodb://${DB_IP}:${DB_PORT}
 # Birthday API
@@ -136,6 +139,49 @@ You can follow the state of the process for errors or important messages by watc
 
 1. **Execute the Main Script**: `python main.py`
 2. Follow the on-screen prompts to manage contacts and notes.
+
+## 🧪 Testing
+
+To ensure the reliability and correctness of the codebase, automated tests have been implemented. The tests cover various aspects of the application, including data validation, email functionality, and API endpoints.
+
+### Running Tests
+
+You can run the tests using the following command:
+
+```bash
+pytest
+```
+
+Make sure you have the necessary dependencies installed before running the tests. If not, you can install them using:
+
+```bash
+pip install -r requirements.txt
+```
+
+### Code Coverage
+We also track the code coverage to measure the effectiveness of our tests. We utilize the `pytest-cov` plugin to generate coverage reports.
+
+1. **Install pytest-cov:**
+
+```bash
+pip install pytest-cov
+```
+
+2. **Run Tests with Coverage:**
+
+```bash
+pytest --cov=grupProject3
+```
+Replace `grupProject3` with the actual name of the module you want to calculate coverage for. The coverage report will be displayed in the terminal after the tests are executed.
+For a detailed HTML coverage report, you can generate it using the following command:
+
+```bash
+pytest --cov=grupProject3 --cov-report=html
+```
+
+This will generate an HTML report in the `htmlcov/` directory, which you can open in your browser to see the coverage details.
+
+Remember, maintaining a high test coverage ensures the stability of the application and helps in identifying potential issues early in the development process.
 
 ## 🤝Contribution
 
