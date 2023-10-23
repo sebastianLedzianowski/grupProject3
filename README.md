@@ -17,6 +17,7 @@ A contact and notes management system integrated with MongoDB.
 - **MongoDB Integration**: Store and manage contacts and notes in a MongoDB database.
 - **Contact Management**: Add, edit, delete, and view contacts with fields like name, surname, phone number, email, and birthday.
 - **Notes Management**: Add, edit, delete, and view notes with fields like title, content, and tags.
+- **Birthday Wishes Generator**: Automatically generate birthday wishes for contacts stored in the application, enabling users to send personalized greetings.
 - **Email Utility**: Send emails directly from the application.
 - **Data Validation**: Ensure valid input for phone numbers, emails, and dates using decorators.
 - **Faker Integration**: Generate fake data for testing and demonstration purposes.
@@ -140,7 +141,7 @@ You can follow the state of the process for errors or important messages by watc
 1. **Execute the Main Script**: `python main.py`
 2. Follow the on-screen prompts to manage contacts and notes.
 
-## 🧪 Testing
+## 🧪Testing
 
 To ensure the reliability and correctness of the codebase, automated tests have been implemented. The tests cover various aspects of the application, including data validation, email functionality, and API endpoints.
 
