@@ -18,19 +18,19 @@ def check_birthday_menu(contact_book_manager):
                 generate_birthday_wish(contact_book_manager, birthday_info, email)
 
 
-def generate_birthday_wish(contact_book_manager, name, email):
+def generate_birthday_wish(contact_book_manager, birthday_info, email):
     while True:
-        print(f"\nWould you like to generate birthday wishes {name['name']}?")
+        print(f"\nWould you like to generate birthday wishes to {birthday_info['name']} {birthday_info['surname']}?")
         print("1. Yes")
         print("2. No")
         user_choice = str(input("Choose option (1/2): "))
         if user_choice == '1':
-            response = contact_book_manager.get_birthday_wish(name)
+            response = contact_book_manager.get_birthday_wish(birthday_info['name'])
             if response and response.status_code == 200:
                 wish = response.json()['wish']
                 print("Birthday wishes generated successfully:")
                 print(f'{wish}')
-                return handle_send_email(name, email, wish)
+                return handle_send_email(birthday_info, email, wish)
             else:
                 print("Error generating birthday wishes.")
         elif user_choice == '2':
@@ -40,12 +40,12 @@ def generate_birthday_wish(contact_book_manager, name, email):
             print("Invalid choice. Birthday wishes not generated.")
 
 
-def handle_send_email(name, email, wish):
+def handle_send_email(birthday_info, email, wish):
     while True:
-        print(f"\nDo you want to send an email with birthday wishes {name['name']}?")
+        print(f"\nDo you want to send an email with birthday wishes to {birthday_info['name']}?")
         print("1. Yes")
         print("2. No")
-        user_choice = str(input("Choose option (1/2):\n "))
+        user_choice = str(input("Choose option (1/2): "))
         if user_choice == '1':
             return send_email(email, "Birthday Wishes", wish)
         print("Invalid input. Please enter a number.\n")
