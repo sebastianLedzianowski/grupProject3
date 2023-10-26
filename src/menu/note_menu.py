@@ -1,4 +1,4 @@
-from src.utils.notes_book.notesbook_collector import NotesBookCollector
+from src.utils.notes_book.notes_book_collector import NotesBookCollector
 
 def notes_menu(notes_book_manager):
     while True:

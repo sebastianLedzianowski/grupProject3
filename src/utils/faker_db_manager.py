@@ -1,7 +1,7 @@
 from src.mongodb.db_connection import DatabaseConnectionManager
 from src.mongodb.db_repository import DataRepository
 from src.utils.contact_book.contact_book_manager import ContactBookManager
-from src.utils.notes_book.notesbook_manager import NotesBookManager
+from src.utils.notes_book.notes_book_manager import NotesBookManager
 from faker import Faker
 import random
 
@@ -12,7 +12,7 @@ data_repo = DataRepository(db_manager)
 
 def faker_notes_book():
     notes_manager = NotesBookManager()
-    for _ in range(20):
+    for _ in range(5):
         dictionary_record = {
             'title': fake.sentence(),
             'tag': [fake.word() for _ in range(random.randint(1, 5))],
@@ -23,7 +23,7 @@ def faker_notes_book():
 
 def faker_contacts_book():
     contacts_manager = ContactBookManager()
-    for _ in range(20):
+    for _ in range(5):
         dictionary_record = {
             'name': fake.first_name(),
             'surname': fake.last_name(),

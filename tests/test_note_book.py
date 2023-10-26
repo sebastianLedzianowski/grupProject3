@@ -1,4 +1,4 @@
-from src.utils.notes_book.notesbook_manager import NotesBookManager
+from src.utils.notes_book.notes_book_manager import NotesBookManager
 from bson import ObjectId
 from mongomock import MongoClient
 import pytest
