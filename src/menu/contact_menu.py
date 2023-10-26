@@ -1,5 +1,4 @@
 from src.utils.contact_book.contact_book_collector import ContactBookCollector
-from src.utils.send_email import send_email
 
 
 def contact_menu(contact_book_manager):
@@ -122,6 +121,7 @@ def choose_contact(contact_book_manager):
             fields = ["name", "surname", "phone_number", "email", "birthday"]
             field = fields[int(choice) - 1]
             value = input(f"Enter the current value of the {field}: ")
+            value = value.capitalize()
             duplicates = contact_book_manager.look_for_doubles(field, value)
 
             if duplicates:
@@ -214,15 +214,16 @@ def contact_edit_delete_menu(contact_book_manager, field, value, _id=None):
         else:
             print("Invalid choice. Choose an option from 1 to 3.")
 
-
 def edit_contact(contact_book_manager, field, value):
     new_value = input(f"Enter the new value for {field}: ")
+    new_value = new_value.capitalize()
     contact_book_manager.edit(field, value, {field: new_value})
     print("Contact edited successfully.")
 
 
 def edit_contact_by_criteria(contact_book_manager, field, _id):
     new_value = input(f"Enter the new value for {field}: ")
+    new_value = new_value.capitalize()
     search_criteria = {"_id": _id}
     updates = {field: new_value}
     contact_book_manager.edit_by_criteria(search_criteria, updates)

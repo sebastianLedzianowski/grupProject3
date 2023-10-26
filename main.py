@@ -1,5 +1,6 @@
 from src.menu.check_birthday_menu import check_birthday_menu
 from src.utils.contact_book.contact_book_manager import ContactBookManager
+from src.mongodb_atlas import atlas_connection
 from src.utils.notes_book.notesbook_manager import NotesBookManager
 from src.menu.contact_menu import contact_menu
 from src.menu.note_menu import notes_menu
@@ -29,4 +30,5 @@ def main():
 
 
 if __name__ == '__main__':
+    mongoDB_driver()
     main()
