@@ -1,5 +1,6 @@
 from dataclasses import asdict
-from src.mongodb.models import AddressBook
+
+from src.mongodb_atlas.models import ContactBook
 from src.utils.data_decorators import *
 
 
@@ -37,7 +38,7 @@ class ContactBookCollector:
         email = ContactBookCollector.get_email()
         birthday = ContactBookCollector.get_birthday()
 
-        address_book_entry = AddressBook(
+        address_book_entry = ContactBook(
             name=name,
             surname=surname,
             phone_number=phone_number,

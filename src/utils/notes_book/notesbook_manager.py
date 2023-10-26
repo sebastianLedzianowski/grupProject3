@@ -1,6 +1,6 @@
-from src.mongodb.db_connection import DatabaseConnectionManager
-from src.mongodb.db_repository import DataRepository
-from src.mongodb.models import NoteBook
+from src.mongodb_atlas.atlas_connection import DatabaseConnectionManager
+from src.mongodb_atlas.atlas_repository import DataRepository
+from src.mongodb_atlas.models import NoteBook
 
 
 class NotesBookManager:
