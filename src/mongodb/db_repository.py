@@ -96,4 +96,3 @@ class DataRepository:
         """
         collection = self._select_collection(value_type)
         return collection.delete_one({field: value})
-

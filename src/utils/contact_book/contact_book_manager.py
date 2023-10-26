@@ -1,12 +1,12 @@
-from src.mongodb.db_connection import DatabaseConnectionManager
-from src.mongodb.db_repository import DataRepository
-from src.mongodb.models import AddressBook
+
 from datetime import datetime, timedelta, date
 from dotenv import load_dotenv
 import requests
 import os
 
-
+from src.mongodb_atlas.models import ContactBook
+from src.mongodb_atlas.atlas_connection import DatabaseConnectionManager
+from src.mongodb_atlas.atlas_repository import DataRepository
 class ContactBookManager:
     def __init__(self):
         self.db_manager = DatabaseConnectionManager()
@@ -15,7 +15,7 @@ class ContactBookManager:
 
     def create(self, user_data):
         try:
-            self.data_repo.create(AddressBook(name=user_data['name'],
+            self.data_repo.create(ContactBook(name=user_data['name'],
                                               surname=user_data['surname'],
                                               phone_number=user_data['phone_number'],
                                               email=user_data['email'],
@@ -25,25 +25,25 @@ class ContactBookManager:
 
     def edit(self, field, value, updates):
         try:
-            self.data_repo.update(value_type=AddressBook, field=field, value=value, updates=updates)
+            self.data_repo.update(value_type=ContactBook, field=field, value=value, updates=updates)
         except Exception as e:
             print(f"An error occurred: {str(e)}")
 
     def edit_by_criteria(self, search_criteria, updates):
         try:
-            self.data_repo.update_by_criteria(value_type=AddressBook, search_criteria=search_criteria, updates=updates)
+            self.data_repo.update_by_criteria(value_type=ContactBook, search_criteria=search_criteria, updates=updates)
         except Exception as e:
             print(f"An error occurred: {str(e)}")
 
     def delete(self, field, value):
         try:
-            self.data_repo.delete(value_type=AddressBook, field=field, value=value)
+            self.data_repo.delete(value_type=ContactBook, field=field, value=value)
         except Exception as e:
             print(f"An error occurred: {str(e)}")
 
     def read_all(self) -> list:
         try:
-            all_documents = self.data_repo.read_all(AddressBook)
+            all_documents = self.data_repo.read_all(ContactBook)
             return list(all_documents)
         except Exception as e:
             print(f"An error occurred: {str(e)}")
@@ -51,7 +51,7 @@ class ContactBookManager:
 
     def get_sorted_contacts(self, sort_key) -> list:
         try:
-            contacts = self.data_repo.read_all(AddressBook)
+            contacts = self.data_repo.read_all(ContactBook)
             sorted_contacts = sorted(contacts, key=lambda x: x.get(sort_key, ""))
             return sorted_contacts
         except Exception as e:
@@ -60,7 +60,7 @@ class ContactBookManager:
 
     def look_for_doubles(self, field, value):
         try:
-            notes = self.data_repo.read_all(AddressBook)
+            notes = self.data_repo.read_all(ContactBook)
             duplicates = []
 
             for note_dict in notes:
@@ -79,7 +79,7 @@ class ContactBookManager:
     def get_days_to_birthday(self):
         today = date.today()
         today_to_30 = today + timedelta(days=30)
-        contacts = self.data_repo.read_all(AddressBook)
+        contacts = self.data_repo.read_all(ContactBook)
         upcoming_birthdays = []
         for contact in contacts:
             birthday = datetime.strptime(contact["birthday"], "%Y-%m-%d")
