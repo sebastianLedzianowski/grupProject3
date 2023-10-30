@@ -1,7 +1,6 @@
 from dataclasses import asdict
-from src.mongodb.models import NoteBook
 from src.utils.data_decorators import validate_input
-
+from src.mongodb_atlas.models import NoteBook
 
 class NotesBookCollector:
     @staticmethod
