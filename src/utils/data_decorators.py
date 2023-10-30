@@ -1,5 +1,8 @@
+import os
 import re
 from datetime import datetime
+import kickbox
+from dotenv import load_dotenv
 
 
 def validate_input(prompt):
@@ -35,12 +38,16 @@ def validate_phone_number(func):
 
 def validate_email(func):
     def wrapper():
+        load_dotenv()
+        client = kickbox.Client(os.getenv("API_KEY"))
+        kbx = client.kickbox()
         while True:
             func()
             email = input('Enter email: ')
-            pattern = r"[a-zA-Z._]+[\w.'']+@\w+[.]\w+\w+"
+            pattern = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b'
             if re.match(pattern, email):
-                return email
+                response = kbx.verify(email)
+                return response.body['result'] != "undeliverable"
             else:
                 print('Invalid email address. Example email: "silmple_adres@example.com"')
 
