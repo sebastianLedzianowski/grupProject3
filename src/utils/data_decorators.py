@@ -27,11 +27,11 @@ def validate_phone_number(func):
         while True:
             func()
             phone_number = input('Enter phone number: ')
-            pattern = r"(\+[4][8]\s)?\d{3}\s\d{3}\s\d{3}"
+            pattern = r"(\[4][8]\s)?\d{3}\s\d{3}\s\d{3}"
             if re.fullmatch(pattern, phone_number):
                 return phone_number
             else:
-                print('Wrong phone number format. Sample number: "123 456 789" or "+48 123 456 789"')
+                print('Wrong phone number format. Sample number: "123 456 789" or "48 123 456 789"')
 
     return wrapper
 

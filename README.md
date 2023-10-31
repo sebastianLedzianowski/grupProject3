@@ -19,10 +19,12 @@ A contact and notes management system integrated with MongoDB.
 - **Notes Management**: Add, edit, delete, and view notes with fields like title, content, and tags.
 - **Birthday Wishes Generator**: Automatically generate birthday wishes for contacts stored in the application, enabling users to send personalized greetings.
 - **Email Utility**: Send emails directly from the application.
+- **SMS Sending via SMSAPI**: Send individual SMS messages using the SMSAPI service, allowing personalized communication through text messages.
 - **Data Validation**: Ensure valid input for phone numbers, emails, and dates using decorators.
 - **Faker Integration**: Generate fake data for testing and demonstration purposes.
 - **Name Day Data Retrieval**: Fetch data about the name days of contacts from an external API, allowing users to know and celebrate their contacts' name days.
 - **Email Validation using External API (Kickbox)**: Utilize Kickbox, an external API, to validate email addresses, ensuring their authenticity and improving email communication reliability.
+
 ## 🧑‍🔬Installation
 
 1. **Clone the Repository**: `git clone https://github.com/sebastianLedzianowski/grupProject3.git`
