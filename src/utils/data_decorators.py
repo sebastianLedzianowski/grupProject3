@@ -47,7 +47,8 @@ def validate_email(func):
             pattern = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b'
             if re.match(pattern, email):
                 response = kbx.verify(email)
-                return response.body['result'] != "undeliverable"
+                if response.body['result'] != "undeliverable":
+                    return email
             else:
                 print('Invalid email address. Example email: "silmple_adres@example.com"')
 
