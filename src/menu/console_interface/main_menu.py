@@ -1,4 +1,4 @@
-from src.menu.abstractmethod.models import UserInterface
+from src.menu.console_interface.abstractmethod.models import UserInterface
 
 class MainMenu(UserInterface):
     def display(self):
