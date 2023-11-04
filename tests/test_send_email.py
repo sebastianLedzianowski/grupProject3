@@ -1,7 +1,7 @@
 from src.utils.send_email import *
 
 def test_send_email():
-    email = 'including@o2.pl'
+    # email = 'including@o2.pl'
     title = 'Temat test'
     content = """
     tresc testowa\nDlaczego\ntak sie \ndzieje
