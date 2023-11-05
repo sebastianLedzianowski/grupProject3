@@ -6,38 +6,14 @@ def notes_menu(notes_book_manager, user_interface, manage_notes_abc, sort_choice
     while True:
         manage_notes_abc.display()
         notes_choice = manage_notes_abc.user_choice()
-        if notes_choice == '1':
-            notes = notes_book_manager.read_all()
-            note_number = 1
-            if not notes:
-                user_interface.display_print("No notes found.")
-            else:
-                for note in notes:
-                    title = note.get("title", "")
-                    tags = ", ".join(note.get("tag", []))
-                    content = note.get("content", "")
-                    user_interface.display_print(f'\nNote Number: {note_number}')
-                    user_interface.display_print(f'Title: {title}')
-                    user_interface.display_print(f'Tags: {tags}')
-                    user_interface.display_print(f'Content: {content}')
-                    note_number += 1
-        elif notes_choice == '2':
-            user_data = NotesBookCollector.get_user_input()
-            notes_book_manager.create(user_data)
-        elif notes_choice == '3':
-            choose_note(notes_book_manager, user_interface, choose_note_abc, note_edit_delete_menu_abc)
-        elif notes_choice == '4':
-            sort_choice_abc.display()
-            sort_choice = sort_choice_abc.user_choice()
-            if sort_choice.isdigit() and int(sort_choice) in range(1, 4):
-                fields = ["title", "tag", "content"]
-                sort_key = fields[int(sort_choice) - 1]
-                sorted_notes = notes_book_manager.sorted(sort_key)
+        match notes_choice:
+            case '1':
+                notes = notes_book_manager.read_all()
                 note_number = 1
-                if not sorted_notes:
+                if not notes:
                     user_interface.display_print("No notes found.")
                 else:
-                    for note in sorted_notes:
+                    for note in notes:
                         title = note.get("title", "")
                         tags = ", ".join(note.get("tag", []))
                         content = note.get("content", "")
@@ -46,15 +22,40 @@ def notes_menu(notes_book_manager, user_interface, manage_notes_abc, sort_choice
                         user_interface.display_print(f'Tags: {tags}')
                         user_interface.display_print(f'Content: {content}')
                         note_number += 1
-            elif sort_choice == '4':
-                user_interface.display_print("Back to Manage Notes.")
-            else:
-                user_interface.display_print("Invalid choice. Choose an option from 1 to 4.")
-        elif notes_choice == '5':
-            user_interface.display_print("Back to Main Menu.")
-            break
-        else:
-            user_interface.display_print("Invalid choice. Choose an option from 1 to 6.")
+            case '2':
+                user_data = NotesBookCollector.get_user_input()
+                notes_book_manager.create(user_data)
+            case '3':
+                choose_note(notes_book_manager, user_interface, choose_note_abc, note_edit_delete_menu_abc)
+            case '4':
+                sort_choice_abc.display()
+                sort_choice = sort_choice_abc.user_choice()
+                if sort_choice.isdigit() and int(sort_choice) in range(1, 4):
+                    fields = ["title", "tag", "content"]
+                    sort_key = fields[int(sort_choice) - 1]
+                    sorted_notes = notes_book_manager.sorted(sort_key)
+                    note_number = 1
+                    if not sorted_notes:
+                        user_interface.display_print("No notes found.")
+                    else:
+                        for note in sorted_notes:
+                            title = note.get("title", "")
+                            tags = ", ".join(note.get("tag", []))
+                            content = note.get("content", "")
+                            user_interface.display_print(f'\nNote Number: {note_number}')
+                            user_interface.display_print(f'Title: {title}')
+                            user_interface.display_print(f'Tags: {tags}')
+                            user_interface.display_print(f'Content: {content}')
+                            note_number += 1
+                elif sort_choice == '4':
+                    user_interface.display_print("Back to Manage Notes.")
+                else:
+                    user_interface.display_print("Invalid choice. Choose an option from 1 to 4.")
+            case '5':
+                user_interface.display_print("Back to Main Menu.")
+                break
+            case _:
+                user_interface.display_print("Invalid choice. Choose an option from 1 to 6.")
 
 
 def choose_note(notes_book_manager, user_interface, choose_note_abc, note_edit_delete_menu_abc):
@@ -114,23 +115,24 @@ def note_edit_delete_menu(notes_book_manager, field, value, user_interface, note
     while True:
         note_edit_delete_menu_abc.display()
         edit_delete_choice = note_edit_delete_menu_abc.user_choice()
-        if edit_delete_choice == '1':
-            if _id is not None:
-                edit_note_by_criteria(notes_book_manager, field, user_interface, _id)
-            else:
-                edit_note(notes_book_manager, field, value, user_interface)
-            break
-        elif edit_delete_choice == '2':
-            if _id is not None:
-                delete_note(notes_book_manager, user_interface, "_id", _id)
-            else:
-                delete_note(notes_book_manager, field, value, user_interface)
-            break
-        elif edit_delete_choice == '3':
-            user_interface.display_print("Back to Manage Notes.")
-            break
-        else:
-            user_interface.display_print("Invalid choice. Choose an option from 1 to 3.")
+        match edit_delete_choice:
+            case '1':
+                if _id is not None:
+                    edit_note_by_criteria(notes_book_manager, field, user_interface, _id)
+                else:
+                    edit_note(notes_book_manager, field, value, user_interface)
+                break
+            case '2':
+                if _id is not None:
+                    delete_note(notes_book_manager, user_interface, "_id", _id)
+                else:
+                    delete_note(notes_book_manager, field, value, user_interface)
+                break
+            case '3':
+                user_interface.display_print("Back to Manage Notes.")
+                break
+            case _:
+                user_interface.display_print("Invalid choice. Choose an option from 1 to 3.")
 
 
 def edit_note(notes_book_manager, field, value, user_interface):

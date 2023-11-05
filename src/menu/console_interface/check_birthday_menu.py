@@ -19,13 +19,14 @@ def check_birthday_menu(contact_book_manager, user_interface):
 
 
 def generate_birthday_wish(contact_book_manager, birthday_info, email, user_interface):
-    while True:
-        user_interface.display_print(
-            f"\nWould you like to generate birthday wishes to {birthday_info['name']} {birthday_info['surname']}?")
-        user_interface.display_print("1. Yes")
-        user_interface.display_print("2. No")
-        user_choice = user_interface.user_choice_input(str(input("Choose option (1/2): ")))
-        if user_choice == '1':
+    user_interface.display_print(
+        f"\nWould you like to generate birthday wishes to {birthday_info['name']} {birthday_info['surname']}?")
+    user_interface.display_print("1. Yes")
+    user_interface.display_print("2. No")
+
+    user_choice = user_interface.user_choice_input(str(input("Choose option (1/2): ")))
+    match user_choice:
+        case '1':
             response = contact_book_manager.get_birthday_wish(birthday_info['name'])
             if response and response.status_code == 200:
                 wish = response.json()['wish']
@@ -34,19 +35,23 @@ def generate_birthday_wish(contact_book_manager, birthday_info, email, user_inte
                 return handle_send_email(birthday_info, email, wish, user_interface)
             else:
                 user_interface.display_print("Error generating birthday wishes.")
-        elif user_choice == '2':
-            user_interface.display_print(f"Birthday wishes not generated.")
-            return
-        else:
+        case '2':
+            return user_interface.display_print(f"Birthday wishes not generated.")
+        case _:
             user_interface.display_print("Invalid choice. Birthday wishes not generated.")
 
 
 def handle_send_email(birthday_info, email, wish, user_interface):
-    while True:
-        user_interface.display_print(f"\nDo you want to send an email with birthday wishes to {birthday_info['name']}?")
-        user_interface.display_print("1. Yes")
-        user_interface.display_print("2. No")
-        user_choice = user_interface.user_choice_input(str(input("Choose option (1/2): ")))
-        if user_choice == '1':
+    user_interface.display_print(f"\nDo you want to send an email with birthday wishes to {birthday_info['name']}?")
+    user_interface.display_print("1. Yes")
+    user_interface.display_print("2. No")
+
+    user_choice = user_interface.user_choice_input(str(input("Choose option (1/2): ")))
+    match user_choice:
+        case '1':
             return send_email(email, "Birthday Wishes", wish)
-        user_interface.display_print("Invalid input. Please enter a number.\n")
+        case '2':
+            return user_interface.display_print(
+                "A birthday greeting email to {birthday_info['name']} was not sent.")
+        case _:
+            user_interface.display_print("Invalid input. Please enter a number.\n")

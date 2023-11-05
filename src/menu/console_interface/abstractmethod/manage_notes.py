@@ -1,4 +1,4 @@
-from src.menu.console_interface.abstractmethod.models import UserInterface
+from src.menu.abstractmethod_models import UserInterface
 
 class ManageNotesABC(UserInterface):
     def display(self):
@@ -10,7 +10,7 @@ class ManageNotesABC(UserInterface):
         print("5. Back to Main Menu")
 
     def user_choice(self):
-        return str(input("Choose option (1/2/3/4/5/6): "))
+        return str(input("Choose option (1/2/3/4/5): "))
 
 class SortChoiceABC(UserInterface):
     def display(self):
