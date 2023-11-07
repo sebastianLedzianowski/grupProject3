@@ -17,50 +17,7 @@ def contact_menu(contact_book_manager, user_interface, manage_contacts_abc, sort
             case '3':
                 choose_contact(contact_book_manager, user_interface, choose_contact_abc, contact_edit_delete_menu_abc)
             case '4':
-                sort_contacts_abc.display()
-                sort_choice = sort_contacts_abc.user_choice()
-                if sort_choice.isdigit() and int(sort_choice) in range(1, 6):
-                    fields = ["name", "surname", "phone_number", "email", "birthday"]
-                    sort_key = fields[int(sort_choice) - 1]
-                    sorted_contacts = contact_book_manager.get_sorted_contacts(sort_key)
-                    if not sorted_contacts:
-                        user_interface.display_print("No contacts found.")
-                    else:
-                        max_name_length = max(len(contact.get('name', '')) for contact in sorted_contacts)
-                        max_surname_length = max(len(contact.get('surname', '')) for contact in sorted_contacts)
-                        max_phone_number_length = max(len(contact.get('phone_number', '')) for contact in sorted_contacts)
-                        max_email_length = max(len(contact.get('email', '')) for contact in sorted_contacts)
-                        max_birthday_length = max(len(contact.get('birthday', '')) for contact in sorted_contacts)
-                        user_interface.display_print(f"\nSorted Contacts by: {sort_key} ")
-                        user_interface.display_print(
-                            "| {:^{}} | {:^{}} | {:^{}} | {:^{}} | {:^{}} |".format('Name', max_name_length, 'Surname',
-                                                                                    max_surname_length, 'Phone number',
-                                                                                    max_phone_number_length, 'Email',
-                                                                                    max_email_length, 'Birthday',
-                                                                                    max_birthday_length))
-                        separator_line = "|{}+{}+{}+{}+{}|".format("-" * (max_name_length + 2),
-                                                                   "-" * (max_surname_length + 2),
-                                                                   "-" * (max_phone_number_length + 2),
-                                                                   "-" * (max_email_length + 2),
-                                                                   "-" * (max_birthday_length + 2))
-                        user_interface.display_print(separator_line)
-                        for contact in sorted_contacts:
-                            name = contact.get('name', '')[:max_name_length]
-                            surname = contact.get('surname', '')[:max_surname_length]
-                            phone_number = contact.get('phone_number', '')[:max_phone_number_length]
-                            email = contact.get('email', '')[:max_email_length]
-                            birthday = contact.get('birthday', '')[:max_birthday_length]
-                            user_interface.display_print(
-                                "| {:^{}} | {:^{}} | {:^{}} | {:^{}} | {:^{}} |".format(name, max_name_length, surname,
-                                                                                        max_surname_length, phone_number,
-                                                                                        max_phone_number_length, email,
-                                                                                        max_email_length, birthday,
-                                                                                        max_birthday_length))
-                            user_interface.display_print(separator_line)
-                elif sort_choice == '6':
-                    user_interface.display_print("Back to Manage Contacts.")
-                else:
-                    user_interface.display_print("Invalid choice. Choose an option from 1 to 6.")
+                sort_contact(sort_contacts_abc, user_interface, contact_book_manager)
             case '5':
                 user_interface.display_print("Back to Main Menu.")
                 break
@@ -148,6 +105,54 @@ def choose_contact(contact_book_manager, user_interface, choose_contact_abc, con
         else:
             user_interface.display_print("Invalid choice. Choose an option from 1 to 6.")
 
+
+def sort_contact(sort_contacts_abc, user_interface, contact_book_manager):
+    sort_contacts_abc.display()
+    sort_choice = sort_contacts_abc.user_choice()
+    if sort_choice.isdigit() and int(sort_choice) in range(1, 6):
+        fields = ["name", "surname", "phone_number", "email", "birthday"]
+        sort_key = fields[int(sort_choice) - 1]
+        sorted_contacts = contact_book_manager.get_sorted_contacts(sort_key)
+        if not sorted_contacts:
+            user_interface.display_print("No contacts found.")
+        else:
+            max_name_length = max(len(contact.get('name', '')) for contact in sorted_contacts)
+            max_surname_length = max(len(contact.get('surname', '')) for contact in sorted_contacts)
+            max_phone_number_length = max(len(contact.get('phone_number', ''))
+                                          for contact in sorted_contacts)
+            max_email_length = max(len(contact.get('email', '')) for contact in sorted_contacts)
+            max_birthday_length = max(len(contact.get('birthday', '')) for contact in sorted_contacts)
+            user_interface.display_print(f"\nSorted Contacts by: {sort_key} ")
+            user_interface.display_print(
+                "| {:^{}} | {:^{}} | {:^{}} | {:^{}} | {:^{}} |".format('Name', max_name_length, 'Surname',
+                                                                        max_surname_length, 'Phone number',
+                                                                        max_phone_number_length, 'Email',
+                                                                        max_email_length, 'Birthday',
+                                                                        max_birthday_length))
+            separator_line = "|{}+{}+{}+{}+{}|".format("-" * (max_name_length + 2),
+                                                       "-" * (max_surname_length + 2),
+                                                       "-" * (max_phone_number_length + 2),
+                                                       "-" * (max_email_length + 2),
+                                                       "-" * (max_birthday_length + 2))
+            user_interface.display_print(separator_line)
+            for contact in sorted_contacts:
+                name = contact.get('name', '')[:max_name_length]
+                surname = contact.get('surname', '')[:max_surname_length]
+                phone_number = contact.get('phone_number', '')[:max_phone_number_length]
+                email = contact.get('email', '')[:max_email_length]
+                birthday = contact.get('birthday', '')[:max_birthday_length]
+                user_interface.display_print(
+                    "| {:^{}} | {:^{}} | {:^{}} | {:^{}} | {:^{}} |".format(name, max_name_length, surname,
+                                                                            max_surname_length,
+                                                                            phone_number,
+                                                                            max_phone_number_length, email,
+                                                                            max_email_length, birthday,
+                                                                            max_birthday_length))
+                user_interface.display_print(separator_line)
+    elif sort_choice == '6':
+        user_interface.display_print("Back to Manage Contacts.")
+    else:
+        user_interface.display_print("Invalid choice. Choose an option from 1 to 6.")
 
 def display_numbered_contacts(contacts, user_interface):
     max_name_length = max(len(contact.get('name', '')) for contact in contacts)
